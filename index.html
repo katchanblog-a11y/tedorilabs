@@ -35,8 +35,8 @@ body{
 .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 24px 110px}
 
 .hero{position:relative;padding:110px 0 78px}
-.tate{position:absolute;top:112px;left:-6px;writing-mode:vertical-rl;font-size:11px;letter-spacing:.44em;color:var(--brass);opacity:0;animation:fadeIn 1.2s .9s ease forwards}
-@media(max-width:940px){.tate{display:none}}
+.tate{display:none;position:absolute;top:112px;left:-52px;writing-mode:vertical-rl;font-size:11px;letter-spacing:.44em;color:var(--brass);opacity:0;animation:fadeIn 1.2s .9s ease forwards}
+@media(min-width:1060px){.tate{display:block}}
 .hero h1{font-family:"Shippori Mincho B1",serif;font-weight:700;font-size:clamp(31px,7.4vw,58px);line-height:1.42;margin:0 0 30px;letter-spacing:.01em}
 .hero h1 .ln{display:block;overflow:hidden}
 .hero h1 .ln>span{display:inline-block;transform:translateY(110%);animation:rise 1.1s var(--ease-out) forwards}
@@ -426,6 +426,21 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
           </select>
         </div>
         <div class="field sel">
+          <label for="healthType">健康保険
+            <button type="button" class="q" data-q="q-health" aria-expanded="false" aria-label="健康保険の説明">?</button>
+          </label>
+          <select id="healthType">
+            <option value="kokuho" selected>市町村の国民健康保険</option>
+            <option value="union">国保組合（美容国保など）</option>
+            <option value="dependent">家族の扶養に入っている</option>
+          </select>
+        </div>
+        <div class="field hide" id="fHealthMonthly">
+          <label for="healthMonthly">保険料<span class="unit">円／月</span></label>
+          <input type="number" id="healthMonthly" value="21000" min="0" step="1000" inputmode="numeric">
+        </div>
+        <div class="qpanel" id="q-health"><div><p>市町村の国民健康保険は<b>所得に連動</b>して保険料が決まります。一方、美容・理容・建設などの<b>国保組合</b>は<b>所得に関係なく定額</b>のことが多く、所得が上がるほど組合のほうが安くなる傾向があります。加入している組合の月額が分かる場合は、そのまま入力してください。</p></div></div>
+        <div class="field sel">
           <label for="accounting">会計ソフト</label>
           <select id="accounting">
             <option value="none" selected>使っていない</option>
@@ -525,7 +540,7 @@ import { calculate, compareWorkStyles, salonPayment } from './js/tax.js';
 import { classify, offersFor, buildStatsRow } from './js/segment.js';
 
 const API = 'https://tedorilabs-api.katchan-blog.workers.dev';
-const TOOL_VERSION = 'v1.4';
+const TOOL_VERSION = 'v1.5';
 const CONSENT_VERSION = 'v1';
 
 const $ = (id) => document.getElementById(id);
@@ -607,6 +622,13 @@ $('workStyle').addEventListener('change', () => updateFields(false));
 $('rentalType').addEventListener('change', () => updateFields(true));
 updateFields(false);
 
+/* ---------- 健康保険の種別 ---------- */
+function updateHealth() {
+  $('fHealthMonthly').classList.toggle('hide', $('healthType').value !== 'union');
+}
+$('healthType').addEventListener('change', updateHealth);
+updateHealth();
+
 /* ---------- reveal ---------- */
 const io = new IntersectionObserver((es) => {
   es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -644,6 +666,9 @@ function readInput() {
     spotHours: +$('spotHours').value || 0,
     usesAccounting: $('accounting').value,
     usesAccountant: +$('accountant').value,
+    healthType: $('healthType').value,
+    healthMonthly: +$('healthMonthly').value || 0,
+    healthInsurance: $('healthType').value,
   };
 }
 const salonCfg = (i, o = {}) => ({
