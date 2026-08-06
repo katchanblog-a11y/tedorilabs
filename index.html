@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>売上は、どこへ消えるのか。｜フリーランス手取りシミュレータ</title>
-<meta name="description" content="売上と経費を入れるだけ。サロンへの支払い、税金、社会保険を差し引いて、実際に手元へ残る額を計算します。面貸しの歩合・席代・併用・時間貸しの4方式に対応。">
+<meta name="description" content="売上と経費を入れるだけ。サロンへの支払い、税金、社会保険を差し引いて、実際に手元へ残る額を計算します。経費の内訳入力で計上漏れも見つかります。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap" rel="stylesheet">
@@ -127,6 +127,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visi
 .subhead{
   grid-column:1/-1;font-size:11px;letter-spacing:.2em;color:var(--brass);
   border-top:1px solid var(--hair);padding-top:20px;margin-top:4px;
+  display:flex;align-items:baseline;gap:16px;
 }
 details{margin-top:32px;border-top:1px solid var(--hair);padding-top:21px}
 summary{cursor:pointer;list-style:none;font-size:11px;letter-spacing:.17em;color:var(--brass)}
@@ -157,6 +158,54 @@ button.go{
 button.go::before{content:"";position:absolute;inset:0;background:var(--brass);transform:translateX(-101%);transition:transform .55s var(--ease-out);z-index:-1}
 button.go:hover{color:var(--ground)}
 button.go:hover::before{transform:translateX(0)}
+
+/* ---- mode tabs（経費の合計／内訳）---- */
+.mode{display:inline-flex;gap:22px;font-size:11px;letter-spacing:.14em}
+.mode button{
+  background:none;border:0;padding:0 0 5px;cursor:pointer;color:var(--paper-dim);
+  font-family:inherit;font-size:inherit;letter-spacing:inherit;
+  border-bottom:1px solid transparent;transition:color .3s ease,border-color .3s ease;
+}
+.mode button.on{color:var(--brass);border-bottom-color:var(--brass)}
+
+/* ---- help（？と説明パネル）---- */
+.q{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:15px;height:15px;margin-left:8px;vertical-align:1px;
+  border:1px solid var(--brass);border-radius:50%;
+  background:none;color:var(--brass);font-size:10px;line-height:1;
+  font-family:"Bodoni Moda",serif;cursor:pointer;opacity:.65;
+  transition:opacity .3s ease,background .3s ease,color .3s ease;padding:0;
+}
+.q:hover{opacity:1}
+.q[aria-expanded="true"]{background:var(--brass);color:var(--ground);opacity:1}
+.qpanel{
+  grid-column:1/-1;display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .55s var(--ease-out),margin .55s var(--ease-out);
+  margin:0;
+}
+.qpanel.open{grid-template-rows:1fr;margin:-8px 0 4px}
+.qpanel>div{overflow:hidden}
+.qpanel p{
+  margin:0;font-size:12px;line-height:2;color:var(--paper-dim);
+  border-left:1px solid var(--brass);padding:2px 0 2px 16px;
+}
+.qpanel p b{color:var(--paper);font-weight:500}
+
+/* ---- 経費内訳 ---- */
+.exgrid{display:grid;grid-template-columns:1fr 130px 92px;gap:14px 20px;align-items:end}
+@media(max-width:600px){.exgrid{grid-template-columns:1fr 104px 76px;gap:12px 12px}}
+.exname{font-size:13px;letter-spacing:.04em;padding-bottom:9px}
+.exname small{display:block;font-size:10.5px;color:var(--paper-dim);letter-spacing:.06em;line-height:1.6}
+.exgrid .field label{font-size:10px}
+.exgrid .qpanel{grid-column:1/-1}
+.extotal{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-top:1px solid var(--brass-dim);margin-top:22px;padding-top:16px;
+}
+.extotal .lb{font-size:11px;letter-spacing:.2em;color:var(--paper-dim)}
+.extotal .vl{font-family:"Bodoni Moda",serif;font-size:23px;font-variant-numeric:tabular-nums;color:var(--brass-bright)}
+.extotal .vl small{font-size:.55em;color:var(--brass);margin-left:4px}
 
 /* ---- result ---- */
 #result{display:none}
@@ -258,7 +307,7 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
     <span class="ln"><span>どこへ<em>消える</em>のか。</span></span>
   </h1>
   <div class="rule"></div>
-  <p class="lede">売上と経費を入れると、サロンへの支払い・税金・社会保険を差し引いた「実際に手元へ残る額」を計算します。面貸しの歩合・席代・併用・時間貸し、4つの契約方式に対応。</p>
+  <p class="lede">売上と経費を入れると、サロンへの支払い・税金・社会保険を差し引いた「実際に手元へ残る額」を計算します。経費を内訳から入れると、計上できていなかった項目も見つかります。</p>
 </div>
 
 <section class="reveal in">
@@ -268,10 +317,6 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
       <div class="field">
         <label for="revenue">年間売上<span class="unit">円・サロンに支払う前</span></label>
         <input type="number" id="revenue" value="6000000" min="0" step="100000" inputmode="numeric">
-      </div>
-      <div class="field">
-        <label for="expense">年間経費<span class="unit">円・材料や道具など</span></label>
-        <input type="number" id="expense" value="600000" min="0" step="50000" inputmode="numeric">
       </div>
       <div class="field sel">
         <label for="occupation">職種</label>
@@ -296,8 +341,24 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
           <option value="corporation">法人</option>
         </select>
       </div>
+      <div class="field sel">
+        <label for="filingType">申告方法
+          <button type="button" class="q" data-q="q-filing" aria-expanded="false" aria-label="申告方法の説明">?</button>
+        </label>
+        <select id="filingType">
+          <option value="blue65">青色申告（65万円控除）</option>
+          <option value="blue10">青色申告（10万円控除）</option>
+          <option value="white" selected>白色申告</option>
+          <option value="unknown">わからない</option>
+        </select>
+      </div>
+      <div class="qpanel" id="q-filing"><div><p><b>青色申告（65万円控除）</b>は、複式簿記での記帳と電子申告を条件に、所得から65万円を差し引ける制度です。白色申告との差は、税と国保をあわせて年10〜20万円になることもあります。会計ソフトを使えば複式簿記は自動化できます。</p></div></div>
 
-      <div class="subhead" id="salonHead">サロンとの契約</div>
+      <div class="subhead" id="salonHead">サロンとの契約
+        <button type="button" class="q" data-q="q-salon" aria-expanded="false" aria-label="契約方式の説明">?</button>
+      </div>
+      <div class="qpanel" id="q-salon"><div><p>面貸し・シェアサロンの契約は大きく4つ。<b>歩合のみ</b>（売上の一定割合を支払う）、<b>月額固定のみ</b>（売上に関係なく席を確保）、<b>月額＋歩合の併用</b>（フリーランスに最も一般的）、<b>時間貸し</b>（使った時間分だけ支払う）。同じ売上でも方式によって手取りは大きく変わります。</p></div></div>
+
       <div class="field sel wide" id="fType">
         <label for="rentalType">支払い方式</label>
         <select id="rentalType">
@@ -324,20 +385,88 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
         <input type="number" id="spotHours" value="80" min="0" step="10" inputmode="numeric">
       </div>
 
-      <div class="subhead">申告と扶養</div>
-      <div class="field sel">
-        <label for="filingType">申告方法</label>
-        <select id="filingType">
-          <option value="blue65">青色申告（65万円控除）</option>
-          <option value="blue10">青色申告（10万円控除）</option>
-          <option value="white" selected>白色申告</option>
-          <option value="unknown">わからない</option>
-        </select>
+      <div class="subhead">経費
+        <span class="mode" role="tablist">
+          <button type="button" id="mSimple" class="on" role="tab">合計で入力</button>
+          <button type="button" id="mDetail" role="tab">内訳から計算</button>
+        </span>
       </div>
+
+      <!-- 合計入力 -->
+      <div class="field wide" id="exSimple">
+        <label for="expense">年間経費<span class="unit">円・サロンへの支払いを除く</span></label>
+        <input type="number" id="expense" value="600000" min="0" step="50000" inputmode="numeric">
+      </div>
+
+      <!-- 内訳入力 -->
+      <div class="field wide hide" id="exDetail">
+        <div class="exgrid">
+
+          <div class="exname">材料費<small>薬剤・消耗品など</small></div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exMat" value="25000" min="0" step="5000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exMatR" value="100" min="0" max="100" inputmode="numeric"></div>
+
+          <div class="exname">会議費・接待交際費
+            <button type="button" class="q" data-q="q-meet" aria-expanded="false" aria-label="会議費の説明">?</button>
+            <small>仕事相手との飲食など</small>
+          </div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exMeet" value="10000" min="0" step="5000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exMeetR" value="100" min="0" max="100" inputmode="numeric"></div>
+          <div class="qpanel" id="q-meet"><div><p>仕事の打ち合わせを兼ねた食事は<b>会議費</b>、取引先やお客様との会食・手土産は<b>接待交際費</b>として計上できます。誰と・何の目的だったかをレシートに書き残しておくのが基本です。プライベートの食事は対象外です。</p></div></div>
+
+          <div class="exname">交通費<small>電車・バス・出張など</small></div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exTravel" value="5000" min="0" step="1000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exTravelR" value="100" min="0" max="100" inputmode="numeric"></div>
+
+          <div class="exname">通信費
+            <button type="button" class="q" data-q="q-phone" aria-expanded="false" aria-label="通信費の説明">?</button>
+            <small>携帯・ネット回線</small>
+          </div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exPhone" value="10000" min="0" step="1000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exPhoneR" value="60" min="0" max="100" inputmode="numeric"></div>
+          <div class="qpanel" id="q-phone"><div><p>携帯やネット回線は仕事とプライベートの両方で使うため、<b>事業で使っている割合だけ</b>を経費にします。これを<b>家事按分</b>といいます。予約対応やSNS運用に使っているなら、50〜70％で按分するケースが多いようです。</p></div></div>
+
+          <div class="exname">車両費
+            <button type="button" class="q" data-q="q-car" aria-expanded="false" aria-label="車両費の説明">?</button>
+            <small>ガソリン・駐車場・保険</small>
+          </div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exCar" value="15000" min="0" step="5000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exCarR" value="60" min="0" max="100" inputmode="numeric"></div>
+          <div class="qpanel" id="q-car"><div><p>ガソリン代・駐車場代・自動車保険などは、<b>事業で使う割合分</b>を経費にできます。通勤や出張撮影・訪問施術に使っているなら、走行距離や使用日数から割合を出すのが一般的です。</p></div></div>
+
+          <div class="exname">車の減価償却
+            <button type="button" class="q" data-q="q-dep" aria-expanded="false" aria-label="減価償却の説明">?</button>
+            <small>車両の購入価格から計算</small>
+          </div>
+          <div class="field"><label>購入価格<span class="unit">円</span></label><input type="number" class="ex" id="exDep" value="0" min="0" step="100000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exDepR" value="60" min="0" max="100" inputmode="numeric"></div>
+          <div class="qpanel" id="q-dep"><div><p><b>ローンの毎月の返済額は、経費にはなりません。</b>経費にできるのは、車両の購入価格を耐用年数（新車の普通車で6年）に分けて計上する<b>減価償却費</b>と、ローンの利息部分だけです。ここでは購入価格を6年で割った額に事業割合を掛けて概算しています。</p></div></div>
+
+          <div class="exname">事務所費
+            <button type="button" class="q" data-q="q-rent" aria-expanded="false" aria-label="事務所費の説明">?</button>
+            <small>自宅家賃の按分など</small>
+          </div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exHome" value="0" min="0" step="10000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exHomeR" value="30" min="0" max="100" inputmode="numeric"></div>
+          <div class="qpanel" id="q-rent"><div><p>自宅で事務作業・在庫保管・オンライン対応などをしている場合、<b>家賃の一部</b>を経費にできます。作業スペースの床面積や使用時間の割合で按分し、20〜40％とするケースが多いようです。持ち家の場合は扱いが異なるため、税理士への確認をおすすめします。</p></div></div>
+
+          <div class="exname">その他<small>道具・書籍・研修・保険料など</small></div>
+          <div class="field"><label>月額<span class="unit">円</span></label><input type="number" class="ex" id="exOther" value="5000" min="0" step="1000" inputmode="numeric"></div>
+          <div class="field"><label>事業割合<span class="unit">％</span></label><input type="number" class="ex" id="exOtherR" value="100" min="0" max="100" inputmode="numeric"></div>
+
+        </div>
+        <div class="extotal">
+          <span class="lb">経費合計（年間）</span>
+          <span class="vl" id="exTotal">0<small>円</small></span>
+        </div>
+      </div>
+
+      <div class="subhead">申告と扶養</div>
       <div class="field">
         <label for="dependents">扶養親族<span class="unit">人</span></label>
         <input type="number" id="dependents" value="0" min="0" max="10" inputmode="numeric">
       </div>
+      <div class="field"></div>
     </div>
 
     <details>
@@ -440,7 +569,7 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
     <div class="sec-head"><span class="sec-no fig">IV</span><h2 class="sec-title">次にできること</h2></div>
     <div class="panel">
       <div id="offers"></div>
-      <p class="note">この計算は一般的な計算式に基づく概算です。国民健康保険料は自治体によって異なります。サロンへの支払いは事業の経費として扱っています。正確な金額は税理士または税務署にご確認ください。</p>
+      <p class="note">この計算は一般的な計算式に基づく概算です。国民健康保険料は自治体によって、経費の按分割合は実際の使用状況によって異なります。正確な金額や個別の判断は、税理士または税務署にご確認ください。</p>
     </div>
   </section>
 </div>
@@ -453,7 +582,7 @@ import { calculate, compareWorkStyles, salonPayment } from './js/tax.js';
 import { classify, offersFor, buildStatsRow } from './js/segment.js';
 
 const API = 'https://tedorilabs-api.katchan-blog.workers.dev';
-const TOOL_VERSION = 'v1.2';
+const TOOL_VERSION = 'v1.3';
 const CONSENT_VERSION = 'v1';
 
 const $ = (id) => document.getElementById(id);
@@ -462,6 +591,59 @@ const man = (n) => Math.round(n / 10000).toLocaleString('ja-JP') + '万';
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let lastSimId = null;
+
+/* ---------- ？の開閉 ---------- */
+document.querySelectorAll('.q').forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const panel = $(btn.dataset.q);
+    const open = panel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+});
+
+/* ---------- 経費モード ---------- */
+let expenseMode = 'simple';
+function setMode(m) {
+  expenseMode = m;
+  $('mSimple').classList.toggle('on', m === 'simple');
+  $('mDetail').classList.toggle('on', m === 'detail');
+  $('exSimple').classList.toggle('hide', m !== 'simple');
+  $('exDetail').classList.toggle('hide', m !== 'detail');
+  if (m === 'detail') updateExTotal();
+}
+$('mSimple').addEventListener('click', () => setMode('simple'));
+$('mDetail').addEventListener('click', () => setMode('detail'));
+
+/* ---------- 経費内訳の合計 ---------- */
+const EX_MONTHLY = [
+  ['exMat', 'exMatR'], ['exMeet', 'exMeetR'], ['exTravel', 'exTravelR'],
+  ['exPhone', 'exPhoneR'], ['exCar', 'exCarR'], ['exHome', 'exHomeR'],
+  ['exOther', 'exOtherR'],
+];
+
+function detailTotal() {
+  let total = 0;
+  for (const [v, r] of EX_MONTHLY) {
+    const m = Math.max(0, +$(v).value || 0);
+    const ratio = Math.min(100, Math.max(0, +$(r).value || 0)) / 100;
+    total += m * 12 * ratio;
+  }
+  const price = Math.max(0, +$('exDep').value || 0);
+  const depR = Math.min(100, Math.max(0, +$('exDepR').value || 0)) / 100;
+  total += (price / 6) * depR;
+  return Math.round(total);
+}
+
+function updateExTotal() {
+  $('exTotal').innerHTML = fmt(detailTotal()) + '<small>円</small>';
+}
+document.querySelectorAll('.ex').forEach((el) => el.addEventListener('input', updateExTotal));
+updateExTotal();
+
+function annualExpense() {
+  return expenseMode === 'detail' ? detailTotal() : Math.max(0, +$('expense').value || 0);
+}
 
 /* ---------- 契約方式による入力欄の出し分け ---------- */
 const RENTAL_DEFAULTS = {
@@ -519,7 +701,7 @@ function countUp(el, to, dur = 1300) {
 function readInput() {
   return {
     revenue: +$('revenue').value || 0,
-    expense: +$('expense').value || 0,
+    expense: annualExpense(),
     filingType: $('filingType').value,
     dependents: +$('dependents').value || 0,
     householdMembers: +$('members').value || 1,
@@ -628,16 +810,15 @@ function drawCompare(input, currentPay) {
   const rent = input.rentMonthly || 150000;
 
   const scenarios = [
-    { key: 'now',        label: '今の条件',       sub: '入力した契約',                              pay: currentPay },
-    { key: 'commission', label: '歩合のみ',       sub: `取り分 ${share}％・席代なし`,                pay: salonPayment(rev, { type: 'commission', share }) },
-    { key: 'fixed',      label: '月額固定のみ',   sub: `月 ${fmt(rent)} 円・歩合なし`,               pay: salonPayment(rev, { type: 'fixed', rentMonthly: rent }) },
-    { key: 'home',       label: '自宅・個人店',   sub: 'サロンへの支払いなし',                       pay: 0 },
+    { key: 'now',        label: '今の条件',     sub: '入力した契約',                pay: currentPay },
+    { key: 'commission', label: '歩合のみ',     sub: `取り分 ${share}％・席代なし`,  pay: salonPayment(rev, { type: 'commission', share }) },
+    { key: 'fixed',      label: '月額固定のみ', sub: `月 ${fmt(rent)} 円・歩合なし`, pay: salonPayment(rev, { type: 'fixed', rentMonthly: rent }) },
+    { key: 'home',       label: '自宅・個人店', sub: 'サロンへの支払いなし',         pay: 0 },
   ];
 
-  const base = { ...input, revenue: rev, expense: input.expense };
   const styles = {};
   scenarios.forEach((s) => { styles[s.key] = { extraExpense: s.pay }; });
-  const res = compareWorkStyles(base, styles);
+  const res = compareWorkStyles(input, styles);
 
   const max = Math.max(...scenarios.map((s) => res[s.key].netIncome), 1);
 
