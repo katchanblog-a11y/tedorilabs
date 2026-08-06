@@ -134,10 +134,15 @@ export function calculate(input) {
 
   const bizIncome = businessIncome(revenue, expense, input.filingType);
 
+  // 健康保険：市町村国保は所得連動、国保組合は定額、扶養は0円
   const healthIns =
     input.socialInsurance != null
       ? Math.max(0, Number(input.socialInsurance))
-      : healthInsurance(bizIncome, members, !!input.age40to64);
+      : input.healthType === 'union'
+        ? Math.max(0, Number(input.healthMonthly) || 0) * 12
+        : input.healthType === 'dependent'
+          ? 0
+          : healthInsurance(bizIncome, members, !!input.age40to64);
 
   const pensionAmount = input.socialInsurance != null ? 0 : pension();
   const socialDeduction = healthIns + pensionAmount;
