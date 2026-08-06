@@ -698,11 +698,15 @@ function drawFlow(r, input, salonPay) {
     { cls: 'sum',   nm: '使えるお金', sm: `月あたり ${fmt(usable / 12)} 円`, v: usable },
   ];
 
-  $('stack').innerHTML = rows.map((x) => `
+  $('stack').innerHTML = rows.map((x) => {
+    const neg = x.v < 0;
+    const abs = fmt(Math.abs(x.v));
+    return `
     <div class="strow ${x.cls}">
       <span class="nm">${x.nm}<small>${x.sm}</small></span>
-      <span class="vl">${x.v < 0 ? '−' : ''}${fmt(Math.abs(x.v))}</span>
-    </div>`).join('');
+      <span class="vl">${neg ? '−' : ''}${abs}</span>
+    </div>`;
+  }).join('');
 
   $('stack').querySelectorAll('.strow').forEach((el, i) => {
     setTimeout(() => el.classList.add('in'), REDUCED ? 0 : 1000 + i * 220);
