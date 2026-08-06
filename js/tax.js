@@ -2,13 +2,13 @@
 // 2025年度（令和7年度）の制度をベースにした概算。
 // 国民健康保険は自治体ごとに料率が異なるため、全国平均相当の概算値を使用。
 //
+// サロンへの支払い（歩合・席代）は事業の経費として扱う。
 // すべて純関数。フロントとWorkerの両方から使える。
 
 // ============================================================
 // 定数
 // ============================================================
 
-// 所得税の速算表（課税所得に対する税率と控除額）
 const INCOME_TAX_BRACKETS = [
   { limit: 1950000, rate: 0.05, deduct: 0 },
   { limit: 3300000, rate: 0.10, deduct: 97500 },
@@ -20,48 +20,40 @@ const INCOME_TAX_BRACKETS = [
 ];
 
 const CONST = {
-  // 基礎控除
-  BASIC_DEDUCTION_INCOME: 480000,   // 所得税
-  BASIC_DEDUCTION_RESIDENT: 430000, // 住民税
+  BASIC_DEDUCTION_INCOME: 480000,
+  BASIC_DEDUCTION_RESIDENT: 430000,
 
-  // 青色申告特別控除
   BLUE_65: 650000,
   BLUE_10: 100000,
 
-  // 復興特別所得税
   RECONSTRUCTION_RATE: 0.021,
 
-  // 住民税
-  RESIDENT_RATE: 0.10,        // 所得割（市町村6% + 道府県4%）
-  RESIDENT_PER_CAPITA: 5000,  // 均等割（森林環境税1,000円を含む概算）
+  RESIDENT_RATE: 0.10,
+  RESIDENT_PER_CAPITA: 5000,
 
-  // 国民年金（月額 × 12）
   PENSION_MONTHLY: 17510,
 
-  // 国民健康保険（全国平均相当の概算）
   KOKUHO: {
-    MEDICAL_RATE: 0.075,      // 医療分・所得割
+    MEDICAL_RATE: 0.075,
     MEDICAL_PER_CAPITA: 45000,
     MEDICAL_CAP: 660000,
 
-    SUPPORT_RATE: 0.028,      // 後期高齢者支援分・所得割
+    SUPPORT_RATE: 0.028,
     SUPPORT_PER_CAPITA: 15000,
     SUPPORT_CAP: 260000,
 
-    CARE_RATE: 0.024,         // 介護分（40〜64歳のみ）
+    CARE_RATE: 0.024,
     CARE_PER_CAPITA: 16000,
     CARE_CAP: 170000,
 
-    BASE_DEDUCTION: 430000,   // 国保の所得割算定時の基礎控除
+    BASE_DEDUCTION: 430000,
   },
 
-  // 扶養控除（一般）
   DEPENDENT_DEDUCTION_INCOME: 380000,
   DEPENDENT_DEDUCTION_RESIDENT: 330000,
 
-  // 消費税（簡易課税・第五種サービス業のみなし仕入率50%）
   CONSUMPTION_RATE: 0.10,
-  SIMPLIFIED_PURCHASE_RATE: 0.5,
+  SIMPLIFIED_PURCHASE_RATE: 0.5, // 簡易課税・第五種（サービス業）
 };
 
 // ============================================================
@@ -93,24 +85,13 @@ export function residentTax(taxableIncomeForResident) {
   );
 }
 
-/**
- * 国民健康保険料（全国平均相当の概算）
- * @param {number} businessInc 事業所得
- * @param {number} members 世帯の加入人数
- * @param {boolean} needsCare 40〜64歳かどうか
- */
+/** 国民健康保険料（全国平均相当の概算） */
 export function healthInsurance(businessInc, members = 1, needsCare = false) {
   const K = CONST.KOKUHO;
   const base = Math.max(0, businessInc - K.BASE_DEDUCTION);
 
-  const medical = Math.min(
-    base * K.MEDICAL_RATE + K.MEDICAL_PER_CAPITA * members,
-    K.MEDICAL_CAP
-  );
-  const support = Math.min(
-    base * K.SUPPORT_RATE + K.SUPPORT_PER_CAPITA * members,
-    K.SUPPORT_CAP
-  );
+  const medical = Math.min(base * K.MEDICAL_RATE + K.MEDICAL_PER_CAPITA * members, K.MEDICAL_CAP);
+  const support = Math.min(base * K.SUPPORT_RATE + K.SUPPORT_PER_CAPITA * members, K.SUPPORT_CAP);
   const care = needsCare
     ? Math.min(base * K.CARE_RATE + K.CARE_PER_CAPITA, K.CARE_CAP)
     : 0;
@@ -123,10 +104,7 @@ export function pension(months = 12) {
   return CONST.PENSION_MONTHLY * months;
 }
 
-/**
- * 消費税（簡易課税・サービス業を想定した概算）
- * 課税事業者でない場合は0
- */
+/** 消費税（簡易課税・サービス業を想定した概算） */
 export function consumptionTax(revenue, isTaxable) {
   if (!isTaxable) return 0;
   const received = revenue * CONST.CONSUMPTION_RATE;
@@ -139,14 +117,14 @@ export function consumptionTax(revenue, isTaxable) {
 
 /**
  * @param {object} input
- *   revenue           年間売上
- *   expense           年間経費
+ *   revenue           年間売上（サロンに支払う前の総額）
+ *   expense           年間経費（サロンへの支払いを含めた総額）
  *   filingType        'blue65' | 'blue10' | 'white'
  *   dependents        扶養親族の数
- *   householdMembers  国保の世帯加入人数（既定1）
+ *   householdMembers  国保の世帯加入人数
  *   age40to64         介護保険の対象か
  *   isTaxableBusiness 消費税の課税事業者か
- *   socialInsurance   社保加入の場合の年間本人負担額（面貸し以外の比較用。既定null）
+ *   socialInsurance   社保加入の場合の年間本人負担額（比較用。既定null）
  */
 export function calculate(input) {
   const revenue = Math.max(0, Number(input.revenue) || 0);
@@ -156,7 +134,6 @@ export function calculate(input) {
 
   const bizIncome = businessIncome(revenue, expense, input.filingType);
 
-  // 社会保険料控除の対象となる額
   const healthIns =
     input.socialInsurance != null
       ? Math.max(0, Number(input.socialInsurance))
@@ -165,22 +142,16 @@ export function calculate(input) {
   const pensionAmount = input.socialInsurance != null ? 0 : pension();
   const socialDeduction = healthIns + pensionAmount;
 
-  // 所得税の課税所得
   const taxableIncome = Math.max(
     0,
-    bizIncome -
-      socialDeduction -
-      CONST.BASIC_DEDUCTION_INCOME -
-      dependents * CONST.DEPENDENT_DEDUCTION_INCOME
+    bizIncome - socialDeduction - CONST.BASIC_DEDUCTION_INCOME
+      - dependents * CONST.DEPENDENT_DEDUCTION_INCOME
   );
 
-  // 住民税の課税所得（控除額が所得税と異なる）
   const taxableResident = Math.max(
     0,
-    bizIncome -
-      socialDeduction -
-      CONST.BASIC_DEDUCTION_RESIDENT -
-      dependents * CONST.DEPENDENT_DEDUCTION_RESIDENT
+    bizIncome - socialDeduction - CONST.BASIC_DEDUCTION_RESIDENT
+      - dependents * CONST.DEPENDENT_DEDUCTION_RESIDENT
   );
 
   const income = incomeTax(taxableIncome);
@@ -202,29 +173,51 @@ export function calculate(input) {
     consumptionTax: consumption,
     totalBurden,
     netIncome,
-    // 手取り率。売上に対する割合
     netRate: revenue > 0 ? netIncome / revenue : 0,
   };
 }
 
 /**
- * 働き方別の比較。同じ売上で手取りがどう変わるかを出す。
- * 面貸し・業務委託は歩合率と固定家賃を考慮する。
+ * サロンへの支払い方式ごとの年間支払額を求める。
  *
- * @param {object} base   calculate() と同じ入力
- * @param {object} styles { chair_rental: {commissionRate, rentMonthly}, ... }
+ * @param {number} revenue 年間売上（総額）
+ * @param {object} cfg
+ *   type        'commission' | 'fixed' | 'both' | 'spot' | 'none'
+ *   share       自分の取り分（％）… commission / both で使用
+ *   rentMonthly 月額席代（円）… fixed / both で使用
+ *   spotHourly  時間単価（円）… spot で使用
+ *   spotHours   月の利用時間（時間）… spot で使用
+ * @returns {number} 年間のサロン支払額
+ */
+export function salonPayment(revenue, cfg = {}) {
+  const rev = Math.max(0, Number(revenue) || 0);
+  const share = Math.min(100, Math.max(0, Number(cfg.share) || 0)) / 100;
+  const rent = Math.max(0, Number(cfg.rentMonthly) || 0) * 12;
+  const spot = Math.max(0, Number(cfg.spotHourly) || 0) * Math.max(0, Number(cfg.spotHours) || 0) * 12;
+
+  switch (cfg.type) {
+    case 'commission': return Math.floor(rev * (1 - share));
+    case 'fixed':      return rent;
+    case 'both':       return Math.floor(rev * (1 - share)) + rent;
+    case 'spot':       return spot;
+    default:           return 0;
+  }
+}
+
+/**
+ * 条件を変えた場合の比較。
+ * サロン支払いは経費に上乗せするだけなので、追加経費だけを渡す。
+ *
+ * @param {object} base    calculate() と同じ入力（expense はサロン支払いを含まない額）
+ * @param {object} styles  { key: { extraExpense } }
  */
 export function compareWorkStyles(base, styles) {
   const out = {};
   for (const [key, cfg] of Object.entries(styles)) {
-    const rate = cfg.commissionRate != null ? cfg.commissionRate / 100 : 1;
-    const rent = (cfg.rentMonthly || 0) * 12;
-
-    // 売上のうち自分の取り分
-    const myRevenue = Math.floor(base.revenue * rate);
-    const myExpense = base.expense + rent;
-
-    out[key] = calculate({ ...base, revenue: myRevenue, expense: myExpense });
+    out[key] = calculate({
+      ...base,
+      expense: base.expense + Math.max(0, cfg.extraExpense || 0),
+    });
   }
   return out;
 }
