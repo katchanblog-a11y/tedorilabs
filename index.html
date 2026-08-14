@@ -214,6 +214,25 @@ button.go:hover::before{transform:translateX(0)}
 .offer:hover .nm::after{transform:translateX(5px)}
 .offer .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:4px}
 
+.art{
+  position:relative;display:block;text-decoration:none;color:inherit;
+  padding:4px 0 4px 0;transition:padding-left .4s var(--ease-out);
+}
+.art::before{
+  content:"";position:absolute;left:0;top:14px;width:0;height:1px;background:var(--brass);
+  transition:width .4s var(--ease-out);
+}
+.art:hover{padding-left:26px}
+.art:hover::before{width:16px}
+.art-kicker{display:block;font-size:11px;letter-spacing:.24em;color:var(--brass);margin-bottom:8px}
+.art-title{
+  display:block;font-family:"Shippori Mincho B1",serif;font-size:clamp(16px,3.4vw,19px);
+  letter-spacing:.06em;line-height:1.7;
+}
+.art-title::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif;display:inline-block;transition:transform .35s var(--ease-out)}
+.art:hover .art-title::after{transform:translateX(5px)}
+.art-ds{display:block;font-size:12.5px;color:var(--paper-dim);margin-top:10px;line-height:1.95}
+
 .note{font-size:11.5px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:17px;margin:38px 0 0}
 footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;text-indent:.34em;color:var(--paper-dim);opacity:.55}
 
@@ -536,6 +555,17 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
     </div>
   </section>
 </div>
+
+<section class="reveal" style="margin-top:96px">
+  <div class="sec-head"><span class="sec-no fig">—</span><h2 class="sec-title">読みもの</h2></div>
+  <div class="panel">
+    <a class="art" href="./articles/keihi-72man.html">
+      <span class="art-kicker">確定申告</span>
+      <span class="art-title">経費を275万円計上したら、税金が72万円変わった話</span>
+      <span class="art-ds">面貸しの美容師が、自分の確定申告書の実数で検証しました。経費を計上した場合としなかった場合で、所得税と住民税は年72万円の差。家事按分の考え方、車のローンの扱い、2025年分から変わった基礎控除についても書いています。</span>
+    </a>
+  </div>
+</section>
 
 <footer class="mincho">TEDORILABS</footer>
 </div>
