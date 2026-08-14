@@ -216,12 +216,16 @@ button.go:hover::before{transform:translateX(0)}
 
 .art{
   position:relative;display:block;text-decoration:none;color:inherit;
-  padding:4px 0 4px 0;transition:padding-left .4s var(--ease-out);
+  padding:24px 0;border-bottom:1px solid var(--hair);
+  transition:padding-left .4s var(--ease-out);
 }
+.art:first-of-type{padding-top:4px}
+.art:last-of-type{border-bottom:0;padding-bottom:4px}
 .art::before{
-  content:"";position:absolute;left:0;top:14px;width:0;height:1px;background:var(--brass);
+  content:"";position:absolute;left:0;top:34px;width:0;height:1px;background:var(--brass);
   transition:width .4s var(--ease-out);
 }
+.art:first-of-type::before{top:14px}
 .art:hover{padding-left:26px}
 .art:hover::before{width:16px}
 .art-kicker{display:block;font-size:11px;letter-spacing:.24em;color:var(--brass);margin-bottom:8px}
@@ -563,6 +567,16 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
       <span class="art-kicker">確定申告</span>
       <span class="art-title">経費を275万円計上したら、税金が72万円変わった話</span>
       <span class="art-ds">面貸しの美容師が、自分の確定申告書の実数で検証しました。経費を計上した場合としなかった場合で、所得税と住民税は年72万円の差。家事按分の考え方、車のローンの扱い、2025年分から変わった基礎控除についても書いています。</span>
+    </a>
+    <a class="art" href="./articles/menkashi-4keiyaku.html">
+      <span class="art-kicker">働き方</span>
+      <span class="art-title">面貸しの契約には4種類ある。同じ売上でも手取りは140万変わる</span>
+      <span class="art-ds">歩合のみ・月額固定のみ・併用・時間貸し。求人票の「歩合最大◯％」だけでは分からない構造と、それぞれの相場を整理しました。契約前に確認しておきたいことも書いています。</span>
+    </a>
+    <a class="art" href="./articles/kokuho-kumiai.html">
+      <span class="art-kicker">社会保険</span>
+      <span class="art-title">美容師の国民健康保険、組合に入ると年48万安くなることがある</span>
+      <span class="art-ds">市町村の国保は所得に連動し、美容業の国保組合は定額。事業所得230万円あたりで有利不利が逆転します。所得別の比較表と、加入するときの注意点をまとめました。</span>
     </a>
   </div>
 </section>
