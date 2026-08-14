@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>経費を275万円計上したら、税金が72万円変わった話｜tedorilabs</title>
+<meta name="description" content="フリーランス美容師が、自分の確定申告書の実数で検証しました。経費を計上した場合としなかった場合で、所得税と住民税の合計は年72万円の差。経費計上の効果を金額で示します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/keihi-72man.html">
+<meta property="og:title" content="経費を275万円計上したら、税金が72万円変わった話">
+<meta property="og:description" content="フリーランス美容師が自分の確定申告書の実数で検証。経費計上の有無で所得税と住民税は年72万円変わりました。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">確定申告</p>
+  <h1>経費を275万円計上したら、<br>税金が72万円変わった話</h1>
+  <p class="meta">2026年8月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p>「経費で落とすと税金が安くなる」というのは、なんとなく知っていました。ただ、実際にいくら変わるのかを計算したことはありませんでした。</p>
+
+<p>去年の確定申告書を見ながら、経費を計上した場合としなかった場合で、所得税と住民税がいくら違うのかを出してみました。結果がこれです。</p>
+
+<div class="figure">
+  <p class="cap">経費計上による税額の差</p>
+  <p class="amt">722,569<span class="yen">円</span></p>
+  <p class="ds">所得税と住民税の合計・年間<br>月あたり約6万円</p>
+</div>
+
+<p>正直、ここまでとは思っていませんでした。<strong>経費を1万円計上するごとに、税金が約2,600円減っている</strong>計算になります。</p>
+
+<h2>前提となる数字</h2>
+
+<p>面貸しで働いている美容師です。サロンとの契約は歩合のみで、取り分は60％。去年の数字はこうでした。</p>
+
+<table>
+  <tr><td>総売上（お客様からの合計）</td><td class="n">10,165,400</td></tr>
+  <tr><td>サロンからの入金（60％）</td><td class="n">6,132,240</td></tr>
+  <tr><td>経費</td><td class="n">2,755,758</td></tr>
+  <tr class="sum"><td>事業所得（青色55万円控除後）</td><td class="n">2,826,482</td></tr>
+</table>
+
+<p>この状態で申告した結果、所得税は89,950円、住民税は約22万7千円でした。合計で約31万7千円です。</p>
+
+<h2>経費を計上しなかったら、どうなっていたか</h2>
+
+<p>同じ売上で、経費をまったく計上しなかった場合を計算します。</p>
+
+<table>
+  <tr><th></th><th style="text-align:right">経費あり</th><th style="text-align:right">経費なし</th></tr>
+  <tr><td>事業所得</td><td class="n">2,826,482</td><td class="n">5,582,240</td></tr>
+  <tr><td>課税所得</td><td class="n">1,762,000</td><td class="n">4,767,000</td></tr>
+  <tr><td>所得税</td><td class="n">89,950</td><td class="n">536,943</td></tr>
+  <tr><td>住民税</td><td class="n">227,415</td><td class="n">502,991</td></tr>
+  <tr class="sum hi"><td>合計</td><td class="n">317,365</td><td class="n">1,039,934</td></tr>
+</table>
+
+<p>差は<strong>722,569円</strong>。104万円払うか、32万円で済むかの違いです。</p>
+
+<p>ここで大事なのは、<strong>経費を計上しても、サロンからの入金そのものは1円も減らない</strong>ということです。減るのは、税金の計算に使われる「所得」だけ。手元のお金が減るわけではありません。</p>
+
+<h2>何を経費にしているか</h2>
+
+<p>税理士にお願いしているので、細かい判断は任せていますが、計上している項目はこのあたりです。</p>
+
+<h3>全額を経費にできるもの</h3>
+<ul>
+  <li><strong>材料費</strong>　薬剤・消耗品など</li>
+  <li><strong>会議費・接待交際費</strong>　仕事相手との食事、お客様への手土産</li>
+  <li><strong>交通費</strong>　電車、講習会への移動</li>
+</ul>
+
+<h3>事業で使う割合だけ経費にできるもの（家事按分）</h3>
+<ul>
+  <li><strong>通信費</strong>　携帯・ネット回線</li>
+  <li><strong>車両費</strong>　ガソリン代、駐車場代、自動車保険</li>
+  <li><strong>事務所費</strong>　自宅の家賃の一部</li>
+</ul>
+
+<p>携帯も車も家も、プライベートでも使います。だから全額は経費にできません。仕事で使っている割合を出して、その分だけを計上します。これを<strong>家事按分</strong>といいます。</p>
+
+<blockquote>
+携帯なら、予約対応やSNSに使っている時間の割合。車なら、仕事で走った距離の割合。家賃なら、作業に使っているスペースの床面積の割合。いずれも「なぜその割合なのか」を説明できる根拠が必要です。
+</blockquote>
+
+<h2>勘違いしていたこと：車のローン</h2>
+
+<p>車をローンで買っているのですが、<strong>毎月の返済額は経費になりません</strong>。これは自分も最初は分かっていませんでした。</p>
+
+<p>元本の返済は、借りたお金を返しているだけなので、経費ではないんです。経費にできるのは次の2つだけ。</p>
+
+<ul>
+  <li><strong>減価償却費</strong>　車両価格を耐用年数（新車の普通車で6年）に分けた金額</li>
+  <li><strong>ローンの利息部分</strong></li>
+</ul>
+
+<p>240万円の車を買っても、その年に落とせるのは40万円ほど。そこからさらに事業割合で按分します。「今年は車を買ったから経費が多い」とはならないわけです。</p>
+
+<h2>2025年分から基礎控除が変わっています</h2>
+
+<p>もうひとつ、去年の申告で気づいたことがあります。<strong>基礎控除が48万円ではなくなっていました。</strong></p>
+
+<p>令和7年度の税制改正で、基礎控除が58万円に引き上げられ、さらに所得に応じた上乗せが入りました。自分の場合は事業所得283万円だったので、<strong>基礎控除は88万円</strong>。以前より40万円分、課税所得が少なくなっています。</p>
+
+<table>
+  <tr><th>合計所得金額</th><th style="text-align:right">基礎控除（所得税）</th></tr>
+  <tr><td>132万円以下</td><td class="n">95万円</td></tr>
+  <tr><td>132万円超 336万円以下</td><td class="n">88万円</td></tr>
+  <tr><td>336万円超 489万円以下</td><td class="n">68万円</td></tr>
+  <tr><td>489万円超 655万円以下</td><td class="n">63万円</td></tr>
+  <tr><td>655万円超 2,350万円以下</td><td class="n">58万円</td></tr>
+</table>
+
+<p class="note">住民税の基礎控除は43万円のまま変わっていません。所得税と住民税で控除額が違うので、税額を自分で計算するときは注意が必要です。なお、336万円以下の区分にある上乗せは令和7年・8年分の時限措置とされています。</p>
+
+<h2>記帳の手間と、72万円</h2>
+
+<p>青色申告をするには複式簿記での記帳が必要で、これが面倒で白色のままにしている人もいると思います。自分も最初はそうでした。</p>
+
+<p>ただ、会計ソフトを使えば銀行口座やカードの明細が自動で取り込まれるので、実際の手間はかなり減ります。ソフトの費用は年1〜2万円程度。<strong>72万円と比べると、比較にならない金額</strong>です。</p>
+
+<p>経費の計上漏れも同じです。レシートを取っておく、按分の根拠をメモしておく。それだけで数十万円が変わります。</p>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費を入れると、サロンへの支払い・税金・社会保険を引いた実際の手取りが出ます。経費を計上した場合としなかった場合の差額も表示されます。</span>
+</a>
+
+<p class="note">この記事の数字は、筆者本人の2025年分の確定申告書に基づく実数です。税額は個々の状況によって異なります。また、経費として計上できるかどうかの判断は、事業の実態によって変わります。個別の税務判断については税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
