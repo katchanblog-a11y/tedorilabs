@@ -34,12 +34,14 @@ const OFFERS = {
     id: 'accounting_blue',
     label: '青色申告に対応した会計ソフト',
     note: '65万円控除を使うには複式簿記での記帳が必要です',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BA5LB+37I4WQ+3SPO+9FDAJ6',
     suppress: (r) => r.usesAccounting && r.usesAccounting !== 'none' && r.usesAccounting !== 'unknown',
   },
   accounting_invoice: {
     id: 'accounting_invoice',
     label: 'インボイス対応の会計ソフト',
     note: '課税事業者は消費税の申告が別途必要になります',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BA5LB+37I4WQ+3SPO+9FDAJ6',
     suppress: (r) => r.usesAccounting && r.usesAccounting !== 'none' && r.usesAccounting !== 'unknown',
   },
   accountant: {
