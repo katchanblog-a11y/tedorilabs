@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>業務委託の美容師が売上1,000万円を超えたら考えること｜tedorilabs</title>
+<meta name="description" content="業務委託の美容師が売上1,000万円を超えたときに知っておきたい、消費税がかかる時期、判定に使う売上、簡易課税での納税額の目安、インボイスの3割特例、2027年からの青色申告の変更、法人化の考え方をまとめました。">
+<link rel="canonical" href="https://tedorilabs.com/articles/uriage-1000man.html">
+<meta property="og:title" content="業務委託の美容師が売上1,000万円を超えたら考えること">
+<meta property="og:description" content="消費税は2年後から。判定に使う売上は契約の形で変わる。インボイスの3割特例、法人化の考え方まで整理しました。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">消費税・インボイス</p>
+  <h1>業務委託の美容師が<br>売上1,000万円を超えたら考えること</h1>
+  <p class="meta">2026年10月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>業務委託で指名が増えてくると、どこかで意識するのが「売上1,000万円」のラインです。ここを超えると、消費税の納税が始まります。ただ、いつから払うのか、どの売上で判定するのか、いくら払うのかは、意外と知られていません。</p>
+
+<p>この記事では、1,000万円が近づいてきた業務委託の美容師が知っておきたいことを、<strong>消費税・インボイス・青色申告・法人化</strong>の順に整理します。</p>
+
+<h2>消費税がかかるのは「2年後」から</h2>
+
+<p>個人事業主が消費税を納めるかどうかは、<strong>2年前（前々年）の売上</strong>で決まります。2026年の売上が1,000万円を超えたら、消費税の納税が始まるのは2028年分からです。</p>
+
+<p>つまり、1,000万円を超えた年には、まだ消費税はかかりません。超えたと分かってから、準備する時間が1年あります。</p>
+
+<blockquote>
+もうひとつ、前年の1〜6月の売上と、その期間に払った給料の両方が1,000万円を超えた場合も、翌年から課税になります。ただし、どちらで判定するかは選べるので、人を雇っていない美容師なら、給料（0円）のほうで判定すればこの条件には当たりません。
+</blockquote>
+
+<h2>判定に使う「売上」はどれか</h2>
+
+<p>業務委託の美容師がいちばん迷うのがここです。お客様が払った総額なのか、サロンから入金される額なのか。</p>
+
+<p>これは<strong>契約の形によって変わります</strong>。</p>
+
+<ul>
+  <li><strong>サロンがお客様からお金を受け取り、歩合分を自分に払う形</strong>：自分の売上は、サロンから受け取る業務委託報酬になるのが一般的です</li>
+  <li><strong>自分がお客様から直接お金を受け取り、サロンに席代を払う形</strong>：お客様からの売上がそのまま自分の売上になり、席代は経費になります</li>
+</ul>
+
+<p>たとえば総売上1,200万円・取り分60％の歩合契約なら、前者の考え方では自分の売上は720万円で、1,000万円には届きません。<strong>同じ働き方でも、契約書の書き方ひとつで課税になるかどうかが変わる</strong>ので、契約書で「誰がお客様からお金を受け取るのか」を確認しておきましょう。判断に迷う場合は、税理士か税務署に確認するのが確実です。</p>
+
+<h2>消費税はいくらになるのか</h2>
+
+<p>美容業は、消費税の計算で「簡易課税」という方法を選ぶと、<strong>受け取った消費税の半分を納める</strong>計算になります（サービス業のみなし仕入率50％）。</p>
+
+<div class="figure">
+  <p class="cap">税込売上1,100万円・簡易課税の場合</p>
+  <p class="amt">500,000<span class="yen">円</span></p>
+  <p class="ds">年間の消費税の納税額の目安（税抜1,000万円 × 10％ × 50％）</p>
+</div>
+
+<p>年50万円は、月にすると4万円以上です。消費税はお客様から預かっているお金という扱いなので、<strong>入ってきた売上を全部使ってしまうと、納税のときに困ります</strong>。課税になる年からは、売上の5％くらいを別の口座に分けておくと安心です。</p>
+
+<p>簡易課税を使うには、その年が始まる前（前の年の12月31日まで）に「消費税簡易課税制度選択届出書」を出す必要があります。2028年分から課税になるなら、2027年中に出しておきます。</p>
+
+<h2>1,000万円以下でも関係ある、インボイスの話</h2>
+
+<p>売上が1,000万円以下でも、インボイスの登録をすれば消費税を納めることになります。業務委託の美容師がインボイスを気にするのは、<strong>サロン側が、登録していない美容師への支払いにかかる消費税を差し引けなくなる</strong>からです。サロンから登録をお願いされたり、報酬の条件の見直しを持ちかけられたりすることがあります。</p>
+
+<p>インボイス登録で課税になった人には、負担を軽くする特例があります。カッコ内は、お客様から受け取った消費税のうち納める割合です。税抜売上600万円（受け取った消費税60万円）の場合で比べます。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>納め方</th><th>対象の年</th><th style="text-align:right">納税額</th></tr>
+  <tr class="hi"><td>2割特例（20％）</td><td>2026年分まで</td><td class="n">120,000</td></tr>
+  <tr><td>3割特例（30％）</td><td>2027・2028年分</td><td class="n">180,000</td></tr>
+  <tr><td>簡易課税（50％）</td><td>期限なし</td><td class="n">300,000</td></tr>
+</table>
+</div>
+
+<p>2割特例は2026年分で終わり、個人事業主は2027年分と2028年分に限り、3割特例が使えます。ただし、<strong>2割特例と3割特例は、インボイス登録をきっかけに課税になった人向け</strong>の制度です。2年前の売上が1,000万円を超えて課税になった年には使えないので、その場合は簡易課税か、通常の計算で納めることになります。</p>
+
+<h2>青色申告の「簡易簿記」も使えなくなる</h2>
+
+<p>2027年分からは青色申告のルールも変わり、<strong>2年前の売上が1,000万円を超えている場合、簡易簿記での青色申告の控除（10万円）がなくなります</strong>。複式簿記で記帳して、e-Taxで提出すれば65万円、さらに会計ソフトでの電子帳簿やデータ連携をしていれば75万円の控除が受けられます。</p>
+
+<p>売上が1,000万円を超えるくらいになると、帳簿の量も増えます。消費税の申告も始まるので、このタイミングで会計ソフトに切り替えておくと、あとがかなり楽になります。青色申告の改正については<a href="./aoiro-shiroiro.html">白色と青色の記事</a>で計算しています。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　確定申告ソフト</span>
+  <span class="tt">マネーフォワード クラウド確定申告を見てみる</span>
+  <span class="ds">青色申告の帳簿づくりと確定申告書の作成ができます。消費税の申告にも対応しています。会員登録は無料です。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>所得が大きくなったら、法人化という選択肢</h2>
+
+<p>売上だけでなく、経費を引いた<strong>所得も大きくなってくると、個人事業主のままより法人にしたほうが、税金や社会保険の負担が軽くなる場合があります</strong>。個人の所得税は所得が増えるほど税率が上がっていくのに対して、法人の税率はそこまで上がらないからです。</p>
+
+<p>どのくらいの所得から有利になるかは、家族構成や経費、自分にいくら給料を払うかで大きく変わります。目安として所得800万〜1,000万円あたりがよく挙げられますが、法人をつくる費用や、毎年の決算・税理士の費用もかかるので、<strong>数字で試算してから決めるのが前提</strong>です。</p>
+
+<p>最近は、個人事業を続けながら小さな法人（いわゆるマイクロ法人）をつくる方法もあります。ただ、仕組みが複雑で向き不向きもはっきりしているので、自分でやるより専門家に相談したほうが確実です。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8PRHCQ+5WBM+5YJRM" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　売上が大きい人向け</span>
+  <span class="tt">マイクロ法人の税務顧問（菊池会計事務所）を見てみる</span>
+  <span class="ds">個人事業主・フリーランス向けに、マイクロ法人の導入を含めた税務顧問をしている会計事務所です。節税効果が顧問料を上回らない場合は契約不要としています。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=4BENDS+8PRHCQ+5WBM+5YJRM" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>まとめ</h2>
+
+<ul>
+  <li>消費税がかかるのは、売上1,000万円を超えた<strong>2年後</strong>から</li>
+  <li>判定に使う売上は、<strong>契約の形</strong>（誰がお客様からお金を受け取るか）で変わる</li>
+  <li>美容業の簡易課税なら、納税額は<strong>受け取った消費税の半分</strong>が目安</li>
+  <li>インボイス登録で課税になった人は、2027・2028年分は<strong>3割特例</strong>が使える</li>
+  <li>所得が大きくなったら、<strong>法人化</strong>も試算してみる価値がある</li>
+</ul>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費を入れると、税金と社会保険を引いた手取りが出ます。消費税の課税事業者になった場合の手取りも計算できます。</span>
+</a>
+
+<p class="note">消費税の計算は簡易課税（第五種事業・みなし仕入率50％）と各特例による概算で、地方消費税を含みます。売上の判定方法や特例の適用条件は個別の契約や状況によって異なります。2027年分からの制度は令和8年度税制改正の内容に基づいています。個別の判断は税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>

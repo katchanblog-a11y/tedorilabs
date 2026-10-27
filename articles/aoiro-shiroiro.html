@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>白色と青色、美容師はどっちにすべきか。手取りで年17万円違った｜tedorilabs</title>
+<meta name="description" content="面貸しの美容師によくある条件（総売上800万円）で、白色申告と青色申告の手取りを計算しました。差は年17万円。2027年分から書面提出の控除が55万円から10万円に下がる改正についても解説します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/aoiro-shiroiro.html">
+<meta property="og:title" content="白色と青色、美容師はどっちにすべきか。手取りで年17万円違った">
+<meta property="og:description" content="総売上800万円の面貸し美容師で計算すると、白色と青色の手取りの差は年17万円。2027年分からの青色申告の改正も解説。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">確定申告</p>
+  <h1>白色と青色、美容師はどっちにすべきか。<br>手取りで年17万円違った</h1>
+  <p class="meta">2026年10月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>業務委託やフリーランスになって最初に迷うのが、「白色申告と青色申告、どっちにすればいいのか」です。青色のほうが得とはよく聞くけれど、手間が増えそうで、なんとなく白色のままにしている人も多いと思います。</p>
+
+<p>この記事では、面貸しの美容師によくある条件で、<strong>白色と青色で実際にいくら手取りが変わるのか</strong>を計算しました。あわせて、2027年分から青色申告のルールが大きく変わるので、その話も書いています。</p>
+
+<h2>白色と青色の違い</h2>
+
+<p>どちらも1年間の売上と経費を記録して、確定申告をするところは同じです。違うのは、<strong>青色は事前に申請して、きちんとした帳簿をつける代わりに、所得から最大65万円を差し引ける</strong>ことです。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>申告方法</th><th>帳簿</th><th style="text-align:right">控除額</th></tr>
+  <tr><td>白色申告</td><td>簡単な記帳</td><td class="n">0</td></tr>
+  <tr><td>青色申告（簡易簿記）</td><td>簡単な記帳</td><td class="n">100,000</td></tr>
+  <tr><td>青色申告（書面で提出）</td><td>複式簿記</td><td class="n">550,000</td></tr>
+  <tr class="hi"><td>青色申告（e-Taxで提出）</td><td>複式簿記</td><td class="n">650,000</td></tr>
+</table>
+</div>
+
+<p>この控除額は、そのまま税金が安くなる額ではありません。<strong>税金や国民健康保険料を計算するときの「所得」が、この分だけ小さくなる</strong>という意味です。所得が小さくなれば、所得税・住民税・国民健康保険料の3つがまとめて下がります。</p>
+
+<h2>手取りでいくら変わるのか</h2>
+
+<p>次の条件で計算してみます。</p>
+
+<ul>
+  <li>年間の総売上 800万円</li>
+  <li>歩合のみの契約（取り分60％）で、サロンへの支払いは年320万円</li>
+  <li>材料費・交通費・携帯代などの経費が年80万円</li>
+  <li>単身・国民健康保険・国民年金（2026年分の制度で計算）</li>
+</ul>
+
+<p>サロンへの支払いも経費なので、経費の合計は400万円。所得は控除前で400万円です。</p>
+
+<div class="scroll">
+<table>
+  <tr>
+    <th>申告方法</th>
+    <th style="text-align:right">所得税</th>
+    <th style="text-align:right">住民税</th>
+    <th style="text-align:right">国保</th>
+    <th style="text-align:right">白色との差</th>
+  </tr>
+  <tr><td>白色</td><td class="n">137,546</td><td class="n">298,217</td><td class="n">427,710</td><td class="n">—</td></tr>
+  <tr><td>青色10万円</td><td class="n">128,387</td><td class="n">289,247</td><td class="n">417,410</td><td class="n">+28,429</td></tr>
+  <tr><td>青色55万円（書面）</td><td class="n">93,361</td><td class="n">248,882</td><td class="n">371,060</td><td class="n">+150,170</td></tr>
+  <tr class="hi"><td>青色65万円（e-Tax）</td><td class="n">88,782</td><td class="n">239,912</td><td class="n">360,760</td><td class="n">+174,019</td></tr>
+</table>
+</div>
+
+<div class="figure">
+  <p class="cap">白色から青色（65万円控除）に変えた場合</p>
+  <p class="amt">174,019<span class="yen">円</span></p>
+  <p class="ds">1年間で増える手取り・総売上800万円の場合</p>
+</div>
+
+<p>同じ売上、同じ経費でも、申告方法を変えるだけで<strong>年17万円</strong>、月にすると約1万4千円、手元に残るお金が増えます。毎年のことなので、10年続ければ170万円以上です。</p>
+
+<p>売上がもっと大きい人ほど差は広がります。同じ計算で、総売上1,100万円・所得580万円の場合は、白色と青色65万円の差は<strong>年24万円</strong>になりました。</p>
+
+<h2>控除額のほかにもある、青色のメリット</h2>
+
+<ul>
+  <li><strong>赤字を3年間繰り越せる</strong>：開業した年や、ケガで働けなかった年の赤字を、翌年以降の黒字と相殺できます</li>
+  <li><strong>家族に払う給料を経費にできる</strong>：家族が予約の管理や経理を手伝っている場合、届け出をすれば給料を経費にできます</li>
+  <li><strong>40万円未満の道具を一度に経費にできる</strong>：ハサミやドライヤーなど、通常なら数年に分けて経費にするものを、買った年にまとめて計上できます（2026年4月以降に買ったもの。それより前は30万円未満。年間の合計は300万円まで）</li>
+</ul>
+
+<p>ハサミは1本で数万円から十数万円することもあるので、美容師にとっては3つ目がかなり効いてきます。</p>
+
+<h2>2027年分から、青色申告のルールが変わります</h2>
+
+<p>ここが一番伝えたいところです。令和8年度の税制改正で、<strong>2027年（令和9年）分の確定申告から、青色申告の控除額が見直されます</strong>。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>帳簿と提出方法</th><th style="text-align:right">2026年分まで</th><th style="text-align:right">2027年分から</th></tr>
+  <tr class="hi"><td>複式簿記・e-Tax＋電子帳簿またはデータ連携</td><td class="n">650,000</td><td class="n">750,000</td></tr>
+  <tr><td>複式簿記・e-Taxで提出</td><td class="n">650,000</td><td class="n">650,000</td></tr>
+  <tr><td>複式簿記・書面で提出</td><td class="n">550,000</td><td class="n">100,000</td></tr>
+  <tr><td>簡易簿記</td><td class="n">100,000</td><td class="n">100,000</td></tr>
+</table>
+</div>
+
+<p>大きいのは、<strong>紙で提出している人の控除が55万円から10万円に下がる</strong>ことです。今まで紙の申告書で青色55万円の控除を受けていた人は、同じやり方を続けると、上の条件で年12万円ほど手取りが減る計算になります。</p>
+
+<p>逆に、<strong>e-Taxで提出して、会計ソフトで帳簿を電子保存したり、銀行やカードの明細を自動で連携したりしている人は、75万円に増えます</strong>。紙の書面提出（10万円）との差は、上の条件で年17万円近くになります。</p>
+
+<blockquote>
+2026年分の申告（2027年2〜3月）までは、今までどおり書面で55万円の控除が受けられます。切り替えを考えるなら、2027年分の記帳が始まる2027年1月までに、会計ソフトとe-Taxの準備をしておくのが安心です。
+</blockquote>
+
+<h2>美容師はどっちにすべきか</h2>
+
+<p>結論としては、<strong>業務委託やフリーランスで続けていくなら、青色申告にしたほうがいい</strong>と思います。上の例でも分かるとおり、差が数万円ではなく十数万円になるからです。</p>
+
+<p>白色を選ぶ理由があるとすれば、「売上がまだ少なく、所得がほとんど出ない」場合くらいです。所得が少なければ、控除で差し引ける余地も小さくなります。</p>
+
+<p>迷っている理由が「複式簿記が分からない」「手間が増えそう」なら、そこは会計ソフトでかなり解決します。銀行口座やカードの明細を取り込めば仕訳を提案してくれるので、簿記の知識がなくても帳簿をつけられます。2027年分からの75万円控除も、会計ソフトでのデータ連携とe-Taxの組み合わせを前提にした仕組みです。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　確定申告ソフト</span>
+  <span class="tt">マネーフォワード クラウド確定申告を見てみる</span>
+  <span class="ds">銀行口座やカードの明細を自動で取り込めて、青色申告に必要な複式簿記の帳簿をつくれます。e-Taxでの提出にも対応しています。会員登録は無料です。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>青色申告を始めるには</h2>
+
+<p>青色申告をするには、税務署に「青色申告承認申請書」を出す必要があります。期限は、<strong>青色申告をしたい年の3月15日まで</strong>です。新しく開業した人は、開業日から2か月以内に出せばその年から青色にできます。</p>
+
+<p>2026年分の期限はもう過ぎているので、今から申請すると青色になるのは2027年分からです。<strong>2027年分から青色にするなら、2027年3月15日までに申請</strong>します。申請書は1枚で、e-Taxでも出せます。</p>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費、申告方法を入れると、税金と社会保険を引いた手取りが出ます。白色と青色で、自分の場合はいくら違うのか確かめてみてください。</span>
+</a>
+
+<p class="note">試算は2026年分の所得税・住民税の制度（基礎控除の改正を反映）と、全国平均相当の国民健康保険料による概算です。国民健康保険料は自治体によって大きく異なります。2027年分からの控除額は令和8年度税制改正の内容に基づいており、細かな要件は国税庁の案内でご確認ください。個別の判断は税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
