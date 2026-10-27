@@ -1,5 +1,5 @@
 // tedorilabs / 手取り計算ロジック
-// 2025年度（令和7年度）の制度をベースにした概算。
+// 令和8年分（2026年分）の所得税・令和9年度住民税の制度をベースにした概算。
 // 国民健康保険は自治体ごとに料率が異なるため、全国平均相当の概算値を使用。
 //
 // サロンへの支払い（歩合・席代）は事業の経費として扱う。
@@ -20,10 +20,11 @@ const INCOME_TAX_BRACKETS = [
 ];
 
 const CONST = {
-  BASIC_DEDUCTION_INCOME: 480000,
+  // 所得税の基礎控除は合計所得金額で変わる（basicDeductionIncome を参照）
   BASIC_DEDUCTION_RESIDENT: 430000,
 
   BLUE_65: 650000,
+  BLUE_55: 550000, // 正規の簿記・書面提出（令和8年分まで）
   BLUE_10: 100000,
 
   RECONSTRUCTION_RATE: 0.021,
@@ -65,8 +66,25 @@ export function businessIncome(revenue, expense, filingType) {
   const gross = Math.max(0, revenue - expense);
   const blue =
     filingType === 'blue65' ? CONST.BLUE_65 :
+    filingType === 'blue55' ? CONST.BLUE_55 :
     filingType === 'blue10' ? CONST.BLUE_10 : 0;
   return Math.max(0, gross - blue);
+}
+
+/**
+ * 所得税の基礎控除（令和8年分）
+ * 489万円以下の104万円・655万円以下の67万円は令和8・9年分の上乗せを含む。
+ * @param {number} totalIncome 合計所得金額
+ */
+export function basicDeductionIncome(totalIncome) {
+  const t = Number(totalIncome) || 0;
+  if (t <= 4890000) return 1040000;
+  if (t <= 6550000) return 670000;
+  if (t <= 23500000) return 620000;
+  if (t <= 24000000) return 480000;
+  if (t <= 24500000) return 320000;
+  if (t <= 25000000) return 160000;
+  return 0;
 }
 
 /** 所得税（復興特別所得税を含む） */
@@ -119,7 +137,7 @@ export function consumptionTax(revenue, isTaxable) {
  * @param {object} input
  *   revenue           年間売上（サロンに支払う前の総額）
  *   expense           年間経費（サロンへの支払いを含めた総額）
- *   filingType        'blue65' | 'blue10' | 'white'
+ *   filingType        'blue65' | 'blue55' | 'blue10' | 'white'
  *   dependents        扶養親族の数
  *   householdMembers  国保の世帯加入人数
  *   age40to64         介護保険の対象か
@@ -149,7 +167,7 @@ export function calculate(input) {
 
   const taxableIncome = Math.max(
     0,
-    bizIncome - socialDeduction - CONST.BASIC_DEDUCTION_INCOME
+    bizIncome - socialDeduction - basicDeductionIncome(bizIncome)
       - dependents * CONST.DEPENDENT_DEDUCTION_INCOME
   );
 
