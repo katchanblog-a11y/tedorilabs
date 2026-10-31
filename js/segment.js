@@ -48,6 +48,7 @@ const OFFERS = {
     id: 'accountant',
     label: '税理士紹介サービス',
     note: '個別の判断は税理士へご相談ください',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BESUD+8BH2U2+35XE+I3SIA',
     suppress: (r) => r.usesAccountant === 1,
   },
   incorporation: {
