@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>業務委託の美容師には退職金がない。小規模企業共済とiDeCoで年5万円の節税｜tedorilabs</title>
+<meta name="description" content="退職金のない業務委託・フリーランスの美容師向けに、小規模企業共済とiDeCoの違いと、掛金でいくら税金が減るかを計算しました。所得400万円・月3万円で年5万4千円。始める前の注意点も解説します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/kyosai-ideco.html">
+<meta property="og:title" content="業務委託の美容師には退職金がない。小規模企業共済とiDeCoで年5万円の節税">
+<meta property="og:description" content="所得400万円の面貸し美容師が月3万円掛けると、税金は年5万4千円減る。小規模企業共済とiDeCoの違いと注意点。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+.scroll table.wrap{min-width:0}
+table.wrap th,table.wrap td{white-space:normal;vertical-align:top}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">老後資金・節税</p>
+  <h1>業務委託の美容師には退職金がない。<br>小規模企業共済とiDeCoで年5万円の節税</h1>
+  <p class="meta">2026年10月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>業務委託やフリーランスの美容師には、会社員のような退職金がありません。年金も国民年金だけなので、会社員より老後に受け取れる額は少なくなります。</p>
+
+<p>その代わり、個人事業主には<strong>掛けたお金がそのまま所得から差し引かれる、退職金代わりの制度</strong>が2つあります。小規模企業共済とiDeCoです。この記事では、2つの違いと、実際にいくら税金が減るのかを計算しました。</p>
+
+<h2>2つの制度の違い</h2>
+
+<div class="scroll">
+<table class="wrap">
+  <tr><th></th><th>小規模企業共済</th><th>iDeCo</th></tr>
+  <tr><td>どんなもの</td><td>個人事業主の退職金制度</td><td>自分で運用する年金</td></tr>
+  <tr><td>掛金（月）</td><td>1,000〜70,000円</td><td>〜68,000円（※）</td></tr>
+  <tr><td>掛金の控除</td><td>全額</td><td>全額</td></tr>
+  <tr><td>受け取り</td><td>廃業・引退のとき</td><td>原則60歳から</td></tr>
+  <tr><td>途中で必要なとき</td><td>掛金の範囲で借りられる</td><td>引き出せない</td></tr>
+  <tr><td>増え方</td><td>決まった利率</td><td>運用次第（減ることも）</td></tr>
+</table>
+</div>
+
+<p class="note">※iDeCoの自営業者の上限は、国民年金基金や国民年金の付加保険料と合わせた額です。2026年12月分の掛金からは月75,000円に引き上げられます。</p>
+
+<p>どちらも、<strong>掛けた金額の全額が「小規模企業共済等掛金控除」として所得から差し引かれます</strong>。受け取るときも、一括なら退職金と同じ扱いになり、税金がかなり軽くなるように作られています。</p>
+
+<h2>いくら税金が減るのか</h2>
+
+<p>総売上800万円、サロンへの支払いと経費を引いた所得が400万円、青色申告（65万円控除）、単身・国民健康保険という条件で計算しました。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>掛金（月額）</th><th style="text-align:right">年間の掛金</th><th style="text-align:right">減る税金（年）</th></tr>
+  <tr><td>10,000円</td><td class="n">120,000</td><td class="n">18,126</td></tr>
+  <tr class="hi"><td>30,000円</td><td class="n">360,000</td><td class="n">54,378</td></tr>
+  <tr><td>50,000円</td><td class="n">600,000</td><td class="n">90,630</td></tr>
+  <tr><td>70,000円</td><td class="n">840,000</td><td class="n">126,882</td></tr>
+</table>
+</div>
+
+<div class="figure">
+  <p class="cap">月3万円を掛けた場合</p>
+  <p class="amt">54,378<span class="yen">円</span></p>
+  <p class="ds">1年間で減る所得税と住民税・所得400万円の場合</p>
+</div>
+
+<p>この条件では、<strong>掛けた額のおよそ15％が、税金が減るという形で戻ってくる</strong>計算です。月3万円なら年5万4千円。銀行に預けておくだけでは、まずつかない差です。</p>
+
+<p>所得が大きい人ほど税率が高いので、効果も大きくなります。総売上1,100万円・所得580万円の条件で計算すると、月3万円で<strong>年10万9千円</strong>、掛金の約30％が戻ってくる計算になりました。</p>
+
+<blockquote>
+注意したいのは、国民健康保険料は下がらないことです。国保の計算には、この控除が使われません。減るのは所得税と住民税だけです。
+</blockquote>
+
+<h2>始める前に知っておきたいこと</h2>
+
+<h3>iDeCoは60歳まで引き出せない</h3>
+<p>iDeCoに入れたお金は、原則として60歳になるまで引き出せません。急にお金が必要になっても使えないので、<strong>生活費の予備を別に確保したうえで、無理のない金額</strong>にしておくことが大前提です。運用次第で、受け取る額が掛けた額より少なくなることもあります。</p>
+
+<h3>小規模企業共済は、早くやめると損をする</h3>
+<p>小規模企業共済は、廃業したときや引退したときに受け取るのが基本です。自分の都合で途中解約すると、加入期間が短い場合は受け取れる額が掛金の合計を下回ります。その代わり、掛金の範囲で事業資金を借りられる制度があり、掛金を減らすこともできます。</p>
+
+<h3>売上が不安定な月も払い続けられるか</h3>
+<p>美容師の売上は、季節や指名の数で月ごとに変わります。どちらの制度も掛金はあとから変えられますが、<strong>売上が少ない月でも払える金額</strong>から始めるのが安心です。</p>
+
+<h2>どちらから始めるか</h2>
+
+<p>考え方は人それぞれですが、業務委託の美容師なら、<strong>まず小規模企業共済から考える</strong>のがひとつの方法です。引退や廃業のときに受け取れて、いざというときは掛金の範囲で借りられるからです。そのうえで余裕があれば、iDeCoを足すという順番です。</p>
+
+<p>小規模企業共済は、中小機構が運営している公的な制度です。申し込みは、取り扱っている銀行や信用金庫、商工会議所などの窓口でできます。iDeCoは、自分で証券会社を選んで口座を開きます。</p>
+
+<p>老後のお金は、年金、共済、iDeCo、NISA、貯金と、組み合わせ方がいろいろあります。自分の場合はいくら必要で、どう組み合わせればいいのか分からなければ、一度お金の専門家に相談してみるのもひとつの方法です。</p>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費を入れると、税金と社会保険を引いた手取りが出ます。まずは今の手取りを出して、毎月いくらまでなら無理なく掛けられるか考えてみてください。</span>
+</a>
+
+<p class="note">試算は2026年分の所得税・住民税の制度による概算で、国民健康保険料は全国平均相当で計算しています。小規模企業共済の受け取り額や解約時の扱い、iDeCoの制度の詳細は、中小機構や各金融機関の案内でご確認ください。iDeCoの運用には元本割れのリスクがあります。個別の判断は税理士やファイナンシャルプランナーにご相談ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
