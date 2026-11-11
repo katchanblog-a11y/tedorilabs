@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>サロンからインボイス登録を頼まれた業務委託の美容師へ。登録するといくら払うのか｜tedorilabs</title>
+<meta name="description" content="業務委託の美容師がサロンからインボイス登録を頼まれたときに、登録すると納める消費税（2割特例・3割特例・簡易課税）と、登録しない場合のサロンの負担（経過措置70％）を、報酬600万円の例で計算しました。報酬の見直しを話し合うときのポイントも解説します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/invoice-touroku.html">
+<meta property="og:title" content="サロンからインボイス登録を頼まれた業務委託の美容師へ">
+<meta property="og:description" content="報酬600万円なら、登録しない場合のサロンの負担は今は年18万円。登録した美容師が3割特例で納めるのも年18万円。金額で整理しました。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+.scroll table.wrap{min-width:0}
+table.wrap th,table.wrap td{white-space:normal;vertical-align:top}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">消費税・インボイス</p>
+  <h1>サロンからインボイス登録を頼まれた<br>業務委託の美容師へ。登録するといくら払うのか</h1>
+  <p class="meta">2026年11月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>業務委託で働いていると、サロンから「インボイスに登録してほしい」「登録しないなら報酬を見直したい」と言われることがあります。登録すると何を払うことになるのか、登録しないとどうなるのか。この記事では、<strong>実際の金額</strong>で整理します。</p>
+
+<p>なお、売上がすでに1,000万円を超えて消費税を納めている人は、登録しても負担は増えません。この記事は、<strong>売上1,000万円以下で、今は消費税を納めていない美容師</strong>向けです。</p>
+
+<h2>なぜサロンは登録してほしいのか</h2>
+
+<p>サロンは、業務委託の美容師に払う報酬に含まれる消費税を、自分が納める消費税から差し引いています。ところが、<strong>美容師がインボイスに登録していないと、この差し引きが一部しかできません</strong>。差し引けなかった分は、サロンの負担になります。</p>
+
+<p>どれだけ差し引けるかは、時期によって段階的に減っていきます。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>時期</th><th style="text-align:right">サロンが差し引ける割合</th></tr>
+  <tr><td>〜2026年9月</td><td class="n">80％</td></tr>
+  <tr class="hi"><td>2026年10月〜2028年9月</td><td class="n">70％</td></tr>
+  <tr><td>2028年10月〜2030年9月</td><td class="n">50％</td></tr>
+  <tr><td>2030年10月〜2031年9月</td><td class="n">30％</td></tr>
+  <tr><td>2031年10月〜</td><td class="n">0％</td></tr>
+</table>
+</div>
+
+<p>この割合は、令和8年度の税制改正で見直されたものです。もともとは2026年10月から50％に下がる予定でしたが、70％の段階が加わり、ゆるやかに減っていくことになりました。</p>
+
+<h2>サロンの負担はいくら増えるのか</h2>
+
+<p>年間の報酬が税抜600万円（消費税60万円）の美容師で計算します。美容師が登録していない場合、サロンが差し引けずに負担する額は次のとおりです。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>時期</th><th style="text-align:right">サロンの負担（年）</th></tr>
+  <tr><td>〜2026年9月</td><td class="n">120,000</td></tr>
+  <tr class="hi"><td>2026年10月〜2028年9月</td><td class="n">180,000</td></tr>
+  <tr><td>2028年10月〜2030年9月</td><td class="n">300,000</td></tr>
+  <tr><td>2031年10月〜</td><td class="n">600,000</td></tr>
+</table>
+</div>
+
+<p>今は年18万円ですが、数年後には30万円、最終的には60万円です。サロンが今のうちに話をしておきたいと考えるのは、この先の負担が大きくなるからです。</p>
+
+<h2>美容師が登録すると、いくら払うのか</h2>
+
+<p>登録すると、美容師は消費税を納めることになります。ただ、登録をきっかけに課税になった人には、負担を軽くする特例があります。同じく税抜600万円の場合です。</p>
+
+<div class="scroll">
+<table>
+  <tr><th>納め方</th><th>使える年</th><th style="text-align:right">納める消費税（年）</th></tr>
+  <tr><td>2割特例</td><td>2026年分まで</td><td class="n">120,000</td></tr>
+  <tr class="hi"><td>3割特例</td><td>2027・2028年分</td><td class="n">180,000</td></tr>
+  <tr><td>簡易課税</td><td>期限なし</td><td class="n">300,000</td></tr>
+</table>
+</div>
+
+<p>2つの表を見比べると分かるとおり、<strong>2028年までは、美容師が登録して納める額と、登録しない場合のサロンの負担がほぼ同じ</strong>です。どちらが負担しても、合計で出ていくお金はあまり変わりません。2029年分以降は、美容師が簡易課税で年30万円、登録しない場合のサロンの負担も2030年9月までは年30万円と、ここも近い額になります。</p>
+
+<p>納めた消費税は、所得税の計算では経費（租税公課）として扱えるので、所得税・住民税・国民健康保険料が少し下がります。手取りが減る額は、納める消費税より少し小さくなります。</p>
+
+<h2>登録しない場合に考えられること</h2>
+
+<p>登録しないという選択もできます。その場合、サロンとの話し合いは大きく3つに分かれると思います。</p>
+
+<ul>
+  <li><strong>今の報酬のまま続ける</strong>：サロンが負担を引き受ける形です</li>
+  <li><strong>報酬を下げる</strong>：サロンが差し引けない分を、報酬から調整する形です。上の例なら、今は年18万円前後が目安になります</li>
+  <li><strong>契約を見直す・終える</strong>：サロンが登録した人だけと契約する方針の場合です</li>
+</ul>
+
+<p>報酬の見直し自体は、話し合いのうえなら珍しいことではありません。ただ、<strong>サロンの負担を大きく超える値下げを一方的に決められる</strong>ような場合は、フリーランス・事業者間取引適正化等法（フリーランス法）や独占禁止法の考え方から問題になることもあります。納得できないときは、弁護士に無料で相談できる「<a href="https://freelance110.mhlw.go.jp/" rel="noopener" target="_blank">フリーランス・トラブル110番</a>」（厚生労働省のサイトで案内されている窓口）があります。</p>
+
+<blockquote>
+話し合いのときは、「登録しない場合にサロンが負担する額は、報酬に対して年いくらか」を一緒に確認すると、冷静に決めやすくなります。感覚ではなく、金額で話すのがおすすめです。
+</blockquote>
+
+<h2>登録するなら知っておきたいこと</h2>
+
+<h3>簡易課税の届出を忘れずに</h3>
+<p>3割特例が使えるのは2028年分までです。2029年分から簡易課税（美容業は受け取った消費税の50％を納める）を使うには、その前の年の年末までに届出が必要です。特例の期間中に、届出の時期を税理士やソフトで確認しておきましょう。</p>
+
+<h3>消費税分を分けておく</h3>
+<p>消費税は年に1回、まとめて納めます。売上の3〜5％くらいを別の口座に分けておくと、納めるときに困りません。</p>
+
+<h3>確定申告の手間が増える</h3>
+<p>所得税の確定申告に加えて、消費税の申告も必要になります。会計ソフトを使っていれば、帳簿から消費税の申告書もつくれるので、手間はかなり減らせます。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　確定申告ソフト</span>
+  <span class="tt">マネーフォワード クラウド確定申告を見てみる</span>
+  <span class="ds">筆者も使っている確定申告ソフトです。インボイスに登録した人の消費税の申告にも対応していて、2割特例などの計算もできます。会員登録は無料です。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>まとめ</h2>
+
+<ul>
+  <li>サロンが登録を頼むのは、登録していない美容師への報酬の消費税を、<strong>一部しか差し引けない</strong>から</li>
+  <li>税抜600万円なら、登録しない場合のサロンの負担は<strong>今は年18万円</strong>。数年後には30万円、最終的には60万円</li>
+  <li>美容師が登録すると、<strong>2027・2028年分は3割特例で年18万円</strong>。2028年まではサロンの負担とほぼ同じ</li>
+  <li>登録しないなら、報酬の見直しは<strong>金額をもとに話し合う</strong></li>
+</ul>
+
+<p>売上が1,000万円に近い人は、どちらにしても数年後に課税になる可能性があります。そちらは<a href="./uriage-1000man.html">売上1,000万円を超えたら考えること</a>にまとめています。</p>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費、インボイス登録の有無を入れると、消費税・所得税・社会保険を引いた手取りが出ます。登録した場合としない場合で、自分の手取りがいくら変わるか比べてみてください。</span>
+</a>
+
+<p class="note">消費税の金額は、地方消費税を含む10％で、美容業の簡易課税（第五種事業・みなし仕入率50％）と各特例の割合をもとに概算しています。経過措置の割合と期間は令和8年度税制改正の内容に基づいています。サロン側の負担は、サロンが本則課税で計算している場合の目安です。個別の判断は税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
