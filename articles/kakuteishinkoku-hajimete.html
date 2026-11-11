@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>業務委託の美容師、初めての確定申告。つまずくのは「何の経費か分からない」｜tedorilabs</title>
+<meta name="description" content="業務委託・面貸しの美容師が初めての確定申告でやることを、流れに沿ってまとめました。薬剤・ハサミ・ガソリン代・席代・講習費などがどの勘定科目に入るかの早見表と、経費にならないもの（国保・国民年金など）、打ち込みを楽にする方法も紹介します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/kakuteishinkoku-hajimete.html">
+<meta property="og:title" content="業務委託の美容師、初めての確定申告。つまずくのは「何の経費か分からない」">
+<meta property="og:description" content="薬剤、ハサミ、ガソリン代、席代、講習費。美容師がよく払うものがどの科目に入るかの早見表つき。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+.scroll table.wrap{min-width:0}
+table.wrap th,table.wrap td{white-space:normal;vertical-align:top}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">確定申告</p>
+  <h1>業務委託の美容師、初めての確定申告。<br>つまずくのは「何の経費か分からない」</h1>
+  <p class="meta">2026年11月　／　フリーランス美容師（面貸し）</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>業務委託になって初めての確定申告で、私がいちばん時間をかけたのは<strong>打ち込み</strong>でした。特に困ったのが、レシートを前にして「これは何の経費に入れればいいのか分からない」という場面です。</p>
+
+<p>この記事では、初めての確定申告の流れと、美容師がよく払うものが<strong>どの科目（勘定科目）に入るのか</strong>の早見表をまとめます。</p>
+
+<h2>確定申告の期間</h2>
+
+<p>2026年分（2026年1月〜12月）の確定申告は、<strong>2027年2月16日（火）から3月15日（月）まで</strong>です。期限ぎりぎりは税務署もソフトも混むので、2月中に終わらせるつもりで準備するのがおすすめです。</p>
+
+<h2>初めての確定申告の流れ</h2>
+
+<h3>1. 1年分の売上を集める</h3>
+<p>サロンから毎月もらう支払明細や、口座への入金記録を1年分そろえます。業務委託の場合、売上として書くのは契約の形によって変わります（<a href="./uriage-1000man.html">判定に使う売上の考え方</a>）。</p>
+
+<h3>2. 経費を集めて、科目に分ける</h3>
+<p>レシート、領収書、カードの明細を集めて、ひとつずつ「何の経費か」を分けていきます。<strong>ここがいちばん時間のかかるところ</strong>です。下の早見表を使ってください。</p>
+
+<h3>3. 決算書をつくる</h3>
+<p>青色申告なら「青色申告決算書」、白色なら「収支内訳書」に、売上と科目ごとの経費の合計を書きます。会計ソフトを使っていれば、帳簿から自動でつくられます。</p>
+
+<h3>4. 控除を入れる</h3>
+<p>国民健康保険料、国民年金、小規模企業共済やiDeCoの掛金、生命保険料などは、経費ではなく<strong>「控除」</strong>として申告書に書きます。払った証明書（控除証明書）がハガキで届くので、捨てずに取っておきましょう。</p>
+
+<h3>5. 提出する</h3>
+<p>青色申告で65万円の控除を受けるには、e-Taxでの提出が必要です。書面で出すと55万円になり、2027年分からは10万円まで下がります（<a href="./aoiro-shiroiro.html">白色と青色の比較</a>）。</p>
+
+<h2>美容師の経費、どの科目に入れる？早見表</h2>
+
+<p>科目は、決算書の決まった欄に合わせて分けます。美容師がよく払うものだと、だいたい次のようになります。</p>
+
+<div class="scroll">
+<table class="wrap">
+  <tr><th>払ったもの</th><th>科目の例</th></tr>
+  <tr><td>カラー剤・パーマ液・トリートメントなどの薬剤</td><td>仕入（材料費）</td></tr>
+  <tr><td>ハサミ・ドライヤー・コームなど（10万円未満）</td><td>消耗品費</td></tr>
+  <tr><td>ハサミなど（10万円以上）</td><td>工具器具備品（減価償却）</td></tr>
+  <tr><td>ウィッグ・タオル・ケープなど</td><td>消耗品費</td></tr>
+  <tr><td>ガソリン代・高速代・駐車場代</td><td>車両費（旅費交通費）</td></tr>
+  <tr><td>電車・バスの運賃</td><td>旅費交通費</td></tr>
+  <tr><td>携帯・ネット回線</td><td>通信費</td></tr>
+  <tr><td>自宅の家賃（仕事で使う分）</td><td>地代家賃</td></tr>
+  <tr><td>サロンに払う席代・面貸し料</td><td>地代家賃（支払手数料）</td></tr>
+  <tr><td>講習会・セミナー・オンラインサロン</td><td>研修費</td></tr>
+  <tr><td>技術書・美容雑誌</td><td>新聞図書費</td></tr>
+  <tr><td>SNS広告・名刺・作品撮りの費用</td><td>広告宣伝費</td></tr>
+  <tr><td>会計ソフト・振込手数料</td><td>支払手数料</td></tr>
+</table>
+</div>
+
+<p>決算書にない科目（研修費など）は、空いている欄に自分で名前を書いて使えます。</p>
+
+<blockquote>
+科目の分け方は、多少違っていても税金の額はほとんど変わりません。大事なのは、<strong>経費になるものかどうか</strong>と、<strong>毎年同じ科目にそろえること</strong>です。迷ったものは、一度決めたら翌年も同じ科目に入れましょう。
+</blockquote>
+
+<h2>経費にならないもの</h2>
+
+<p>初めての人が間違えやすいのが、ここです。次のものは<strong>経費には入れません</strong>。</p>
+
+<ul>
+  <li><strong>国民健康保険料・国民年金</strong>：経費ではなく「社会保険料控除」として、申告書の控除の欄に書きます</li>
+  <li><strong>自分の所得税・住民税</strong>：経費にはなりません</li>
+  <li><strong>私服</strong>：サロンで着ていても、普段も着られる服は経費になりにくいです（<a href="./biyoushi-keihi.html">経費にできなかったもの</a>）</li>
+  <li><strong>プライベートの分</strong>：車・携帯・家賃は、仕事で使う割合の分だけです</li>
+</ul>
+
+<h2>打ち込みを楽にする方法</h2>
+
+<p>初めての年に苦労してから、私は<strong>仕事の支払いをなるべくカードにまとめて、そのカードを会計ソフトと連携</strong>させています。カードで払ったものは自動で取り込まれるので、確定申告のときは中身を確認して振り分けるだけになりました。マネーフォワードには、同じお店の支払いを次から自動で同じ科目に振り分けるルールの機能もあります。</p>
+
+<p>車や家賃の按分の割合など、自分では判断しにくいところは税理士さんと相談して決めています。全部を自分でやらなくても、迷うところだけ専門家に聞くという方法もあります。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　確定申告ソフト</span>
+  <span class="tt">マネーフォワード クラウド確定申告を見てみる</span>
+  <span class="ds">筆者が使っている確定申告ソフトです。カードや銀行口座と連携すると明細が自動で取り込まれ、科目の候補も出してくれます。青色申告決算書の作成とe-Taxでの提出にも対応しています。会員登録は無料です。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>まとめ</h2>
+
+<ul>
+  <li>2026年分の確定申告は<strong>2027年2月16日〜3月15日</strong></li>
+  <li>いちばん時間がかかるのは、経費を<strong>科目に分ける作業</strong></li>
+  <li>科目の分け方より、<strong>経費になるかどうか</strong>と<strong>毎年そろえること</strong>が大事</li>
+  <li>国保・国民年金は経費ではなく<strong>控除</strong></li>
+  <li>カードと会計ソフトの連携で、打ち込みはかなり減らせる</li>
+</ul>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">売上と経費を入れると、税金と社会保険を引いた手取りが出ます。確定申告の前に、だいたいの税金を知っておくと安心です。</span>
+</a>
+
+<p class="note">科目の例は一般的な分け方で、事業の内容や税理士の方針によって異なる場合があります。家事按分の割合など個別の判断は、税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
