@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>理容師の業務委託・面貸し、手取りはいくら残る？売上と歩合率別に計算｜tedorilabs</title>
+<meta name="description" content="業務委託・面貸しで働く理容師の手取りを、月の売上（50万円・70万円）と歩合率（50％・60％）の組み合わせで、税金と社会保険まで引いて計算しました。歩合率10％の差は年45万〜63万円。理容国保の保険料と、面貸しだと加入できない組合があることも解説します。">
+<link rel="canonical" href="https://tedorilabs.com/articles/riyoushi-tedori.html">
+<meta property="og:title" content="理容師の業務委託・面貸し、手取りはいくら残る？">
+<meta property="og:description" content="月の売上70万円・取り分60％なら、手取りは年342万円。歩合率10％の差は年45万〜63万円。理容国保の注意点も。">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0c1420;--ground-2:#111c2b;--paper:#ece6da;--paper-dim:#8b98a8;
+  --brass:#c6a15b;--brass-bright:#e0bd78;--brass-dim:rgba(198,161,91,.22);
+  --hair:rgba(236,230,218,.10);--keep:#7fb79a;--tax:#a86450;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:2;letter-spacing:.02em;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 100px}
+a{color:var(--brass)}
+
+/* header */
+.top{padding:44px 0 0;font-size:11px;letter-spacing:.3em;color:var(--brass)}
+.top a{text-decoration:none}
+header.hd{padding:44px 0 48px;border-bottom:1px solid var(--hair);margin-bottom:52px}
+.kicker{font-size:11px;letter-spacing:.24em;color:var(--brass);margin:0 0 18px}
+h1{
+  font-family:"Shippori Mincho B1",serif;font-weight:700;
+  font-size:clamp(26px,5.6vw,40px);line-height:1.55;margin:0 0 24px;letter-spacing:.01em;
+}
+.meta{font-size:12px;color:var(--paper-dim);letter-spacing:.08em;margin:0}
+
+/* body */
+h2{
+  font-family:"Shippori Mincho B1",serif;font-weight:500;font-size:clamp(18px,3.6vw,22px);
+  letter-spacing:.06em;margin:64px 0 22px;padding-top:26px;border-top:1px solid var(--hair);
+}
+h3{font-size:15px;font-weight:700;letter-spacing:.05em;margin:38px 0 12px;color:var(--brass-bright)}
+p{margin:0 0 22px;font-size:15px}
+strong{color:var(--brass-bright);font-weight:500}
+ul{padding-left:20px;margin:0 0 22px}
+li{font-size:15px;margin-bottom:8px}
+
+/* 数字を見せる枠 */
+.figure{
+  border:1px solid var(--brass-dim);padding:28px;margin:34px 0;
+  background:linear-gradient(180deg,rgba(236,230,218,.04),rgba(236,230,218,.01));
+}
+.figure .cap{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);margin:0 0 12px;text-align:center}
+.figure .amt{
+  font-family:"Bodoni Moda",serif;font-size:clamp(34px,9vw,52px);line-height:1;
+  text-align:center;color:var(--brass-bright);font-variant-numeric:tabular-nums;margin:0;
+}
+.figure .amt .yen{font-size:.4em;color:var(--brass);margin-left:.14em;vertical-align:.3em;font-family:"Shippori Mincho B1",serif}
+.figure .ds{font-size:12px;color:var(--paper-dim);text-align:center;margin:14px 0 0;line-height:1.9}
+
+table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+th,td{padding:12px 8px;border-bottom:1px solid var(--hair);text-align:left}
+th{font-size:11px;letter-spacing:.14em;color:var(--paper-dim);font-weight:500}
+td.n{text-align:right;font-family:"Bodoni Moda",serif;font-variant-numeric:tabular-nums;font-size:15px}
+tr.hi td{color:var(--brass-bright)}
+tr.sum td{border-bottom:0;border-top:1px solid var(--brass-dim);padding-top:16px}
+
+blockquote{
+  margin:30px 0;padding:2px 0 2px 20px;border-left:1px solid var(--brass);
+  color:var(--paper-dim);font-size:14px;
+}
+.note{font-size:12px;color:var(--paper-dim);line-height:1.95;border-left:1px solid var(--brass-dim);padding-left:16px;margin:34px 0}
+
+/* CTA */
+.cta{
+  display:block;text-decoration:none;color:inherit;margin:56px 0 0;
+  border:1px solid var(--brass-dim);padding:28px;text-align:center;
+  transition:border-color .4s ease;
+}
+.cta:hover{border-color:var(--brass)}
+.cta .lb{font-size:11px;letter-spacing:.24em;color:var(--paper-dim);display:block;margin-bottom:10px}
+.cta .tt{font-family:"Shippori Mincho B1",serif;font-size:17px;letter-spacing:.08em}
+.cta .tt::after{content:"→";color:var(--brass);margin-left:12px;font-family:sans-serif}
+.cta .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:10px}
+
+.pr{display:block;text-decoration:none;color:inherit;margin:30px 0 34px;border:1px solid var(--brass-dim);padding:20px 22px;transition:border-color .4s ease}
+.pr:hover{border-color:var(--brass)}
+.pr .lb{font-size:10px;letter-spacing:.2em;color:var(--paper-dim);display:block;margin-bottom:6px}
+.pr .tt{font-size:15px;font-weight:500;color:var(--brass-bright)}
+.pr .tt::after{content:"→";color:var(--brass);margin-left:10px}
+.pr .ds{display:block;font-size:12px;color:var(--paper-dim);margin-top:6px;line-height:1.8}
+.disc{font-size:11px;color:var(--paper-dim);letter-spacing:.06em;margin:-28px 0 40px}
+footer{margin-top:70px;padding-top:30px;border-top:1px solid var(--hair);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);text-align:center}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:28px 0}
+th,td{white-space:nowrap}
+.scroll table{min-width:460px}
+.scroll table.wrap{min-width:0}
+table.wrap th,table.wrap td{white-space:normal;vertical-align:top}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="top"><a href="../">← TEDORILABS</a></p>
+
+<header class="hd">
+  <p class="kicker">理容師</p>
+  <h1>理容師の業務委託・面貸し、<br>手取りはいくら残る？売上と歩合率別に計算</h1>
+  <p class="meta">2026年11月　／　tedorilabs</p>
+</header>
+
+<p class="disc">本記事には広告（アフィリエイトリンク）が含まれます。</p>
+
+<p>理容室でも、業務委託や面貸しで働く理容師が増えています。ただ、業務委託の手取りについて書かれた情報は美容師向けが中心で、理容師向けのものはあまり見かけません。</p>
+
+<p>そこでこの記事では、<strong>業務委託の理容師が、税金と社会保険を引いたあといくら手元に残るのか</strong>を、売上と歩合率の組み合わせで計算しました。仕組みは美容師と同じなので、tedorilabsのほかの記事もあわせて参考にしてください。</p>
+
+<h2>計算の条件</h2>
+
+<ul>
+  <li>歩合のみの契約（売上の50％または60％が自分の取り分）</li>
+  <li>材料費・交通費・道具などの経費が年60万円</li>
+  <li>青色申告（65万円控除）</li>
+  <li>単身・40歳未満・市町村の国民健康保険と国民年金</li>
+  <li>2026年分の税制、2026年度の国民年金保険料（月17,920円）で計算</li>
+</ul>
+
+<h2>売上と歩合率別の手取り</h2>
+
+<div class="scroll">
+<table>
+  <tr>
+    <th>月の売上</th>
+    <th>取り分</th>
+    <th style="text-align:right">受け取る額（年）</th>
+    <th style="text-align:right">手取り（年）</th>
+    <th style="text-align:right">手取り（月）</th>
+  </tr>
+  <tr><td>50万円</td><td>50％</td><td class="n">3,000,000</td><td class="n">1,877,837</td><td class="n">156,486</td></tr>
+  <tr><td>50万円</td><td>60％</td><td class="n">3,600,000</td><td class="n">2,334,741</td><td class="n">194,562</td></tr>
+  <tr><td>70万円</td><td>50％</td><td class="n">4,200,000</td><td class="n">2,791,646</td><td class="n">232,637</td></tr>
+  <tr class="hi"><td>70万円</td><td>60％</td><td class="n">5,040,000</td><td class="n">3,422,181</td><td class="n">285,182</td></tr>
+</table>
+</div>
+
+<p>受け取る額から、経費、所得税、住民税、国民健康保険料、国民年金を引いたものが手取りです。たとえば月の売上70万円・取り分60％なら、年504万円を受け取って、手元に残るのは<strong>年342万円、月にすると約28万5千円</strong>です。</p>
+
+<h2>歩合率10％の差は、手取りで年45万〜63万円</h2>
+
+<div class="figure">
+  <p class="cap">取り分50％と60％の手取りの差（月の売上70万円）</p>
+  <p class="amt">630,535<span class="yen">円</span></p>
+  <p class="ds">1年間の手取りの差・月にすると約5万円</p>
+</div>
+
+<p>同じ売上でも、取り分が10％違うだけで、手取りは月の売上50万円なら年45万円、70万円なら年63万円変わります。契約のときは、歩合率だけでなく、<strong>材料費や席代をどちらが持つのか</strong>もあわせて確認しましょう。歩合率が高くても材料費が自分持ちなら、実際の差は小さくなります。契約方式ごとの違いは<a href="./menkashi-4keiyaku.html">面貸しの契約4種類の記事</a>で計算しています。</p>
+
+<h2>理容師の国民健康保険：理容国保という選択肢</h2>
+
+<p>上の計算では、市町村の国民健康保険で計算しています。国保は所得に応じて上がるので、月の売上70万円・取り分60％の場合は年40万円を超えます。</p>
+
+<p>理容師には、<strong>理容業の国民健康保険組合（理容国保）</strong>があります。保険料は所得に関係なく定額で、たとえば東京理容国民健康保険組合なら、40歳未満の組合員は月16,700円（2026年度）です。同じ条件で比べると、月の売上70万円・取り分60％の人なら、年20万円ほど安くなる計算です。</p>
+
+<p>ただし、組合によっては<strong>面貸しや業務委託、フリーランスの人は加入できない</strong>ことがあります。住所や働く店舗の場所の条件もあるので、まずは組合に、自分の働き方で入れるかを確認してください。詳しくは<a href="./kokuho-kumiai.html">美容師・理容師の国民健康保険の記事</a>にまとめています。</p>
+
+<h2>業務委託の理容師が最初にやっておくこと</h2>
+
+<h3>開業届と青色申告の申請</h3>
+<p>業務委託で働き始めたら、税金の上では個人事業主です。事業を始めてから1か月以内に開業届、2か月以内に青色申告承認申請書を税務署に出します。青色申告にすると、白色より手取りが年十数万円増えることもあります（<a href="./aoiro-shiroiro.html">白色と青色の比較</a>）。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BESUD+8BH2U2+35XE+HZPWI" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　開業届の作成サービス</span>
+  <span class="tt">弥生のかんたん開業届を見てみる</span>
+  <span class="ds">開業届と青色申告承認申請書を無料でつくれます。スマホでも作成でき、できた書類はPDFで保存してコンビニで印刷できます。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BESUD+8BH2U2+35XE+HZPWI" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h3>経費を記録する</h3>
+<p>レザーやシェービング用品、カミソリの替え刃、ハサミ、クロスなどの道具は、仕事で使うものなら経費になります。1つ10万円未満の道具は、買った年に全額を経費にできます。どの経費をどの科目に入れるかは、<a href="./kakuteishinkoku-hajimete.html">初めての確定申告の記事</a>に早見表があります。</p>
+
+<a class="pr" href="https://px.a8.net/svt/ejp?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" rel="sponsored noopener" target="_blank">
+  <span class="lb">PR　確定申告ソフト</span>
+  <span class="tt">マネーフォワード クラウド確定申告を見てみる</span>
+  <span class="ds">カードや銀行口座と連携すると、経費の明細が自動で取り込まれます。青色申告の帳簿づくりとe-Taxでの提出に対応しています。会員登録は無料です。</span>
+</a>
+<img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=4BENDS+8I0UHM+4JGQ+BX3J6" alt="" style="position:absolute;width:1px;height:1px;opacity:0">
+
+<h2>まとめ</h2>
+
+<ul>
+  <li>月の売上70万円・取り分60％なら、手取りは<strong>年342万円（月約28万5千円）</strong></li>
+  <li>取り分が10％違うと、手取りは<strong>年45万〜63万円</strong>変わる</li>
+  <li>理容国保なら国保より安くなることがあるが、<strong>面貸し・業務委託は加入できない組合もある</strong></li>
+  <li>働き始めたら、<strong>開業届と青色申告の申請</strong>を早めに</li>
+</ul>
+
+<a class="cta" href="../">
+  <span class="lb">自分の数字で確かめる</span>
+  <span class="tt">手取りシミュレータ</span>
+  <span class="ds">美容師向けにつくったシミュレータですが、理容師でも計算の仕組みは同じです。売上と歩合率、経費を入れると、税金と社会保険を引いた手取りが出ます。</span>
+</a>
+
+<p class="note">試算は2026年分の所得税・住民税の制度と、全国平均相当の国民健康保険料による概算です。国民健康保険料は自治体によって大きく異なります。理容国保の保険料と加入条件は組合ごとに異なります。個別の判断は税理士または税務署にご確認ください。</p>
+
+<footer>TEDORILABS</footer>
+
+</div>
+</body>
+</html>
