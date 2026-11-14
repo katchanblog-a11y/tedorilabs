@@ -152,6 +152,9 @@ export function calculate(input) {
 
   const bizIncome = businessIncome(revenue, expense, input.filingType);
 
+  // 小規模企業共済・iDeCoの掛金（月額）。所得税・住民税の課税所得からのみ差し引く（国保の計算には使わない）
+  const kyosai = Math.min(Math.max(0, Number(input.kyosaiMonthly) || 0), 145000) * 12;
+
   // 健康保険：市町村国保は所得連動、国保組合は定額、扶養は0円
   const healthIns =
     input.socialInsurance != null
@@ -167,13 +170,13 @@ export function calculate(input) {
 
   const taxableIncome = Math.max(
     0,
-    bizIncome - socialDeduction - basicDeductionIncome(bizIncome)
+    bizIncome - socialDeduction - kyosai - basicDeductionIncome(bizIncome)
       - dependents * CONST.DEPENDENT_DEDUCTION_INCOME
   );
 
   const taxableResident = Math.max(
     0,
-    bizIncome - socialDeduction - CONST.BASIC_DEDUCTION_RESIDENT
+    bizIncome - socialDeduction - kyosai - CONST.BASIC_DEDUCTION_RESIDENT
       - dependents * CONST.DEPENDENT_DEDUCTION_RESIDENT
   );
 
@@ -182,6 +185,14 @@ export function calculate(input) {
   const consumption = consumptionTax(revenue, !!input.isTaxableBusiness);
 
   const totalBurden = income + resident + healthIns + pensionAmount + consumption;
+
+  // 掛金がなかった場合の所得税・住民税との差（掛金で減った税金）
+  let taxSaved = 0;
+  if (kyosai > 0) {
+    const ti0 = Math.max(0, bizIncome - socialDeduction - basicDeductionIncome(bizIncome) - dependents * CONST.DEPENDENT_DEDUCTION_INCOME);
+    const tr0 = Math.max(0, bizIncome - socialDeduction - CONST.BASIC_DEDUCTION_RESIDENT - dependents * CONST.DEPENDENT_DEDUCTION_RESIDENT);
+    taxSaved = incomeTax(ti0) + residentTax(tr0) - income - resident;
+  }
   const netIncome = revenue - expense - totalBurden;
 
   return {
@@ -197,6 +208,8 @@ export function calculate(input) {
     totalBurden,
     netIncome,
     netRate: revenue > 0 ? netIncome / revenue : 0,
+    kyosaiAnnual: kyosai,
+    taxSaved,
   };
 }
 

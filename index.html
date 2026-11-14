@@ -501,6 +501,13 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
         <div class="field switch" style="align-self:end">
           <input type="checkbox" id="invoice"><label for="invoice">インボイス登録済み</label>
         </div>
+        <div class="field">
+          <label for="kyosai">小規模企業共済・iDeCoの掛金<span class="unit">円／月</span>
+            <button type="button" class="q" data-q="q-kyosai" aria-expanded="false" aria-label="掛金の説明">?</button>
+          </label>
+          <input type="number" id="kyosai" value="0" min="0" max="145000" step="1000" inputmode="numeric">
+        </div>
+        <div class="qpanel" id="q-kyosai"><div><p>小規模企業共済とiDeCoの掛金は、<b>全額が所得から差し引かれ</b>、所得税と住民税が下がります（国民健康保険料は下がりません）。両方に入っている場合は合計の月額を入れてください。入れると、掛金でいくら税金が減るかも表示されます。<a href="./articles/kyosai-ideco.html">くわしい解説</a></p></div></div>
       </div>
     </details>
 
@@ -531,6 +538,11 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
           <p class="cap">経費を計上したことで軽くなった負担</p>
           <p class="amt"><span id="savingAmt" class="fig">0</span><span class="yen mincho">円</span></p>
           <p class="ds" id="savingDs"></p>
+        </div>
+        <div class="saving" id="kyosaiBox" style="display:none">
+          <p class="cap">共済・iDeCoの掛金で減った税金</p>
+          <p class="amt"><span id="kyosaiAmt" class="fig">0</span><span class="yen mincho">円</span></p>
+          <p class="ds" id="kyosaiDs"></p>
         </div>
       </div>
     </div>
@@ -573,6 +585,11 @@ footer{text-align:center;padding:70px 0 0;font-size:11px;letter-spacing:.34em;te
 <section class="reveal" style="margin-top:96px">
   <div class="sec-head"><span class="sec-no fig">—</span><h2 class="sec-title">読みもの</h2></div>
   <div class="panel">
+    <a class="art" href="./articles/kojo-ichiran.html">
+      <span class="art-kicker">確定申告</span>
+      <span class="art-title">業務委託の美容師が確定申告で使える控除の一覧。2026年分の変更点も</span>
+      <span class="art-ds">経費とは別に差し引ける控除をまとめました。基礎控除は所得489万円以下なら104万円に。国保・年金・共済・iDeCoは全額。確定申告をする人はふるさと納税のワンストップ特例が使えない点にも注意。</span>
+    </a>
     <a class="art" href="./articles/shakaihoken-2026.html">
       <span class="art-kicker">社会保険</span>
       <span class="art-title">業務委託の美容師の社会保険、2026年に何が変わったのか</span>
@@ -778,6 +795,7 @@ function readInput() {
     healthType: $('healthType').value,
     healthMonthly: +$('healthMonthly').value || 0,
     healthInsurance: $('healthType').value,
+    kyosaiMonthly: Math.min(145000, Math.max(0, +$('kyosai').value || 0)),
   };
 }
 const salonCfg = (i, o = {}) => ({
@@ -792,7 +810,7 @@ const salonCfg = (i, o = {}) => ({
 function drawFlow(r, input, salonPay) {
   const gross = input.revenue - salonPay;          // サロンからの入金
   const burden = r.totalBurden;                     // 税金＋社会保険
-  const usable = gross - burden;                    // 使えるお金
+  const usable = gross - burden - (r.kyosaiAnnual || 0); // 使えるお金（積立に回す掛金を除く）
 
   countUp($('gross'), gross);
   const sub = $('grossSub');
@@ -804,6 +822,7 @@ function drawFlow(r, input, salonPay) {
     { cls: 'minus', nm: '税金', sm: '所得税・住民税' + (r.consumptionTax > 0 ? '・消費税' : ''),
       v: -(r.incomeTax + r.residentTax + r.consumptionTax) },
     { cls: 'minus', nm: '社会保険', sm: '国民健康保険・国民年金', v: -(r.healthIns + r.pension) },
+    ...(r.kyosaiAnnual > 0 ? [{ cls: 'minus', nm: '共済・iDeCoの掛金', sm: '将来のための積立', v: -r.kyosaiAnnual }] : []),
     { cls: 'sum',   nm: '使えるお金', sm: `月あたり ${fmt(usable / 12)} 円`, v: usable },
   ];
 
@@ -843,6 +862,19 @@ function drawSaving(input, salonPay, currentResult) {
     `<br>経費を計上しても、サロンからの入金そのものは減りません。減るのは、税の計算に使われる所得です。`;
 
   setTimeout(() => box.classList.add('in'), REDUCED ? 0 : 1700);
+}
+
+/* ---------- 共済・iDeCoの節税 ---------- */
+function drawKyosai(r) {
+  const box = $('kyosaiBox');
+  if (!(r.kyosaiAnnual > 0)) { box.style.display = 'none'; box.classList.remove('in'); return; }
+  box.style.display = '';
+  countUp($('kyosaiAmt'), Math.max(0, r.taxSaved));
+  const rate = r.kyosaiAnnual > 0 ? Math.round(r.taxSaved / r.kyosaiAnnual * 100) : 0;
+  $('kyosaiDs').innerHTML =
+    `年間 ${fmt(r.kyosaiAnnual)} 円の掛金のうち、約${rate}％が所得税・住民税の減額として戻ってくる計算です。` +
+    `<br>掛金は使えるお金からは減りますが、将来のための積立として残ります。iDeCoは原則60歳まで引き出せません。`;
+  setTimeout(() => box.classList.add('in'), REDUCED ? 0 : 1900);
 }
 
 /* ---------- instrument ---------- */
@@ -1024,6 +1056,7 @@ $('run').addEventListener('click', async () => {
 
   drawFlow(r, input, salonPay);
   drawSaving(input, salonPay, r);
+  drawKyosai(r);
   drawInstrument(r, input.expense, salonPay);
   drawDetail(r, input.expense, salonPay);
   drawCompare(input, salonPay);
