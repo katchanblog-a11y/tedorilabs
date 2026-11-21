@@ -55,7 +55,7 @@ const OFFERS = {
     id: 'incorporation',
     label: '法人成りの相談',
     note: '課税所得が大きくなると法人のほうが有利になる場合があります',
-    url: 'https://px.a8.net/svt/ejp?a8mat=4BENDS+8PRHCQ+5WBM+5YJRM',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BESUD+8BH2U2+35XE+I3SIA',
     suppress: (r) => r.workStyle === 'corporation',
   },
   kyosai: {
